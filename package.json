@@ -1,0 +1,42 @@
+{
+  "name": "ts-pacman",
+  "version": "0.0.1",
+  "description": "An implementation of Pac-Man using Canvas and TypeScript",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesseanwright/ts-pacman.git"
+  },
+  "keywords": [
+    "pacman",
+    "pac-man",
+    "typescript",
+    "canvas",
+    "game",
+    "composition",
+    "ecs",
+    "entity",
+    "entity-component-system"
+  ],
+  "author": "James Wright <james@jamesswright.co.uk>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamesseanwright/ts-pacman/issues"
+  },
+  "homepage": "https://github.com/jamesseanwright/ts-pacman#readme",
+  "devDependencies": {
+    "@types/jest": "24.0.16",
+    "jest": "24.8.0",
+    "node-static": "0.7.11",
+    "prettier": "1.18.2",
+    "rollup": "1.17.0",
+    "rollup-plugin-node-resolve": "5.2.0",
+    "rollup-plugin-terser": "5.1.1",
+    "rollup-plugin-typescript2": "0.22.1",
+    "ts-jest": "24.0.2",
+    "typescript": "3.5.3"
+  }
+}
