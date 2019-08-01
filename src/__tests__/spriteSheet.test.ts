@@ -29,6 +29,11 @@ describe('spriteSheet', () => {
 
     sheet.width = sheet.height = 500;
 
-    const spriteSheet = createSpriteSheet(sheetContext, spriteContext, sheet, definitions);
+    const spriteSheet = createSpriteSheet(
+      sheetContext,
+      spriteContext,
+      sheet,
+      definitions,
+    );
   });
 });

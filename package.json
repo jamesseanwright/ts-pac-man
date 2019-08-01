@@ -4,6 +4,7 @@
   "description": "An implementation of Pac-Man using Canvas and TypeScript",
   "main": "dist/index.js",
   "scripts": {
+    "format": "prettier --write rollup.config.js 'src/**/*.ts'",
     "test": "jest"
   },
   "repository": {
