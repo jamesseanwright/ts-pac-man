@@ -1,0 +1,1 @@
+Sprite sheet attribution: https://www.spriters-resource.com/arcade/pacman/sheet/52631/
