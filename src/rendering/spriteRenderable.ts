@@ -5,7 +5,10 @@ export interface SpriteRenderable {
   positionable: Positionable;
 }
 
-const createSpriteRenderable = (spriteName: string, positionable: Positionable): SpriteRenderable => ({
+const createSpriteRenderable = (
+  spriteName: string,
+  positionable: Positionable,
+): SpriteRenderable => ({
   spriteName,
   positionable,
 });

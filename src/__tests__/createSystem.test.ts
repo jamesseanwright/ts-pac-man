@@ -7,7 +7,9 @@ interface TestComponent {
 describe('createSystem', () => {
   it('should create a system that calls a delegate update function for each provided component', () => {
     const next = jest.fn();
-    const components = Array(5).fill(null).map((_, i) => ({ i }));
+    const components = Array(5)
+      .fill(null)
+      .map((_, i) => ({ i }));
     const system = createSystem<TestComponent>(components, next);
     const time = 2000;
 

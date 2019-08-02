@@ -6,7 +6,7 @@ const createSpriteRenderSystem = (
   context: CanvasRenderingContext2D,
   spriteSheet: Map<string, ImageBitmap>,
   camera: Camera2D,
-  components: SpriteRenderable[]
+  components: SpriteRenderable[],
 ) =>
   createSystem<SpriteRenderable>(components, (time, component) => {
     const sprite = spriteSheet.get(component.spriteName);
