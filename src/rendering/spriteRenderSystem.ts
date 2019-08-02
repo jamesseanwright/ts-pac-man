@@ -1,14 +1,17 @@
 import createSystem from '../system';
-import { Camera2D } from './camera';
+import project2D, { Project2D } from './camera';
 import { SpriteRenderable } from './spriteRenderable';
 
-const createSpriteRenderSystem = (
-  context: CanvasRenderingContext2D,
+type Context = Pick<CanvasRenderingContext2D, 'drawImage'> & {
+  canvas: Pick<HTMLCanvasElement, 'width' | 'height'>
+};
+
+export const createSpriteRenderSystem = (
+  context: Context,
   spriteSheet: Map<string, ImageBitmap>,
-  camera: Camera2D,
-  components: SpriteRenderable[],
+  project: Project2D,
 ) =>
-  createSystem<SpriteRenderable>(components, (time, component) => {
+  (component: SpriteRenderable) => {
     const sprite = spriteSheet.get(component.spriteName);
 
     if (!sprite) {
@@ -18,7 +21,14 @@ const createSpriteRenderSystem = (
     const [x, y] = component.positionable.pos;
     const { width, height } = component.positionable;
 
-    context.drawImage(sprite, ...camera.project(x, y, width, height));
-  });
+    context.drawImage(sprite, ...project(context.canvas.width, context.canvas.height, x, y, width, height));
+  };
 
-export default createSpriteRenderSystem;
+export default (
+  context: CanvasRenderingContext2D,
+  spriteSheet: Map<string, ImageBitmap>,
+  components: SpriteRenderable[],
+) => createSystem<SpriteRenderable>(
+  components,
+  createSpriteRenderSystem(context, spriteSheet, project2D),
+);

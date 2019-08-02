@@ -18,7 +18,7 @@ describe('createSystem', () => {
     expect(next).toHaveBeenCalledTimes(components.length);
 
     components.forEach(component => {
-      expect(next).toHaveBeenCalledWith(time, component);
+      expect(next).toHaveBeenCalledWith(component, time);
     });
   });
 });
