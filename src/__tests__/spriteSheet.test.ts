@@ -12,14 +12,19 @@ describe('spriteSheet', () => {
       ['blinky', [52, 82, 28, 28]],
     ];
 
-    const createSpriteSheet = spriteSheetCreator((img: ImageBitmapSource, ...dimensions: number[]) =>
-      Promise.resolve(computeStubImageName(...dimensions) as unknown as ImageBitmap)
+    const createSpriteSheet = spriteSheetCreator(
+      (img: ImageBitmapSource, ...dimensions: number[]) =>
+        Promise.resolve((computeStubImageName(
+          ...dimensions,
+        ) as unknown) as ImageBitmap),
     );
 
     const spriteSheet = await createSpriteSheet(sheet, definitions);
 
     definitions.forEach(([name, dimensions]) => {
-      expect(spriteSheet.get(name)).toEqual(computeStubImageName(...dimensions));
+      expect(spriteSheet.get(name)).toEqual(
+        computeStubImageName(...dimensions),
+      );
     });
   });
 });
