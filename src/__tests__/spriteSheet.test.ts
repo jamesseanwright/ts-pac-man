@@ -1,41 +1,25 @@
 import { spriteSheetCreator, SpriteDefinition } from '../spriteSheet';
-import { promisify } from 'util';
-import { readFile as cbReadFile } from 'fs';
-import { resolve as resolvePath } from 'path';
 
-const readFile = promisify(cbReadFile);
-
-const getSpriteSheet = async () => {
-  const imageData = await readFile(
-    resolvePath(__dirname, '..', 'images', 'spritesheet.png'),
-  );
-
-  const image = new Image();
-
-  image.src = `data:image/png;base64,${imageData.toString('base64')}`;
-
-    /* load event isn't fired by jsdom's
-     * Image implementation so we can
-     * just resolve after setting src */
-  return image;
-};
+const computeStubImageName = (...dimensions: number[]) =>
+  `Stub ImageBitmap for [${dimensions.join(', ')}]`;
 
 describe('spriteSheet', () => {
   it('should create in-memory images from a spritesheet image for each provided definition', async () => {
-    const sheet = await getSpriteSheet();
+    const sheet = new Image();
 
     const definitions: SpriteDefinition[] = [
       ['pac-man', [20, 50, 32, 32]],
       ['blinky', [52, 82, 28, 28]],
     ];
 
-    const createSpriteSheet = spriteSheetCreator((img: HTMLImageElement) => Promise.resolve(src));
+    const createSpriteSheet = spriteSheetCreator((img: ImageBitmapSource, ...dimensions: number[]) =>
+      Promise.resolve(computeStubImageName(...dimensions) as unknown as ImageBitmap)
+    );
+
     const spriteSheet = await createSpriteSheet(sheet, definitions);
 
-    console.log('******', spriteSheet);
-
-    spriteSheet.forEach((sprite, key) => {
-
+    definitions.forEach(([name, dimensions]) => {
+      expect(spriteSheet.get(name)).toEqual(computeStubImageName(...dimensions));
     });
   });
 });
