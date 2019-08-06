@@ -4,6 +4,9 @@
   "description": "An implementation of Pac-Man using Canvas and TypeScript",
   "main": "dist/index.js",
   "scripts": {
+    "build": "rollup -c && bash -c 'cp -r src/{index.html,images} dist'",
+    "start": "static -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}' dist",
+    "dev": "npm run build && npm start",
     "format": "git diff-index --quiet HEAD -- && (prettier --write rollup.config.js 'src/**/*.ts' && git commit -am 'Fixes formatting') || echo 'Uncommitted  files! Please run git commit first.'",
     "test": "jest"
   },

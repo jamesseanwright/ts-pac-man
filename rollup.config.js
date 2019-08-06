@@ -9,7 +9,6 @@ export default {
     dir: 'dist',
     format: 'esm',
   },
-  inlineDynamicImports,
   plugins: [
     resolve({
       extensions: ['.js', '.jsx', '.ts'],
