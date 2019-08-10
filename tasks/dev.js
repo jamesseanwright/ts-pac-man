@@ -15,7 +15,7 @@ const fileServer = new Server('./dist', {
 
 const serveFile = fileServer.serve.bind(fileServer);
 const server = http.createServer(serveFile);
-const watcher = rollup.watch(config);
+const watcher = rollup.watch(config(false));
 
 watcher.on('event', event => {
   if (event.code === 'BUNDLE_START') {

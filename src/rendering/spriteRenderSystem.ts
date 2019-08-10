@@ -36,9 +36,7 @@ export const createSpriteRenderSystem = (
 export default (
   context: CanvasRenderingContext2D,
   spriteSheet: Map<string, ImageBitmap>,
-  components: SpriteRenderable[],
 ) =>
   createSystem<SpriteRenderable>(
-    components,
     createSpriteRenderSystem(context, spriteSheet, project2D),
   );

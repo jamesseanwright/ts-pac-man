@@ -5,7 +5,7 @@ const { terser } = require('rollup-plugin-terser');
 const typescriptPlugin = require('rollup-plugin-typescript2');
 const typescript = require('typescript');
 
-module.exports = {
+module.exports = ({ prod }) => ({
   input: 'src/index.ts',
   output: {
     dir: 'dist',
@@ -18,7 +18,7 @@ module.exports = {
     typescriptPlugin({
       typescript,
     }),
-    terser({
+    prod && terser({
       mangle: {
         toplevel: true,
       },
@@ -27,4 +27,4 @@ module.exports = {
   watch: {
     include: "src/**/*.ts",
   },
-};
+});

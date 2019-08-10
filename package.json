@@ -4,7 +4,7 @@
   "description": "An implementation of Pac-Man using Canvas and TypeScript",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rollup -c && npm run copy-static",
+    "build": "rollup -c --prod && npm run copy-static",
     "copy-static": "bash -c 'cp -r src/{index.html,images} dist'",
     "start": "static -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}' dist",
     "dev": "npm run copy-static && ./tasks/dev.js",
