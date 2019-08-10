@@ -31,6 +31,8 @@ const loadSpriteSheet = () =>
     sheet.src = '/images/spritesheet.png';
   });
 
+context.imageSmoothingEnabled = false;
+
 (async () => {
   const sprites = await loadSpriteSheet();
 
