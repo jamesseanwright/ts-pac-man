@@ -20,6 +20,8 @@ export const createSpriteRenderSystem = (
   const [x, y] = component.positionable.pos;
   const { width, height } = component.positionable;
 
+  console.log(...project(x, y, width, height));
+
   context.drawImage(sprite, ...project(x, y, width, height));
 };
 
