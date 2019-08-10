@@ -37,7 +37,8 @@ const TILE_PIXEL_HEIGHT = 20;
 const TILE_SPRITE_SHEET_START_X = 228;
 const TILE_SPRITE_SHEET_START_Y = 0;
 
-interface Tile { // TODO: reuse positionable?!
+interface Tile {
+  // TODO: reuse positionable?!
   x: number;
   y: number;
 }
@@ -67,10 +68,16 @@ context.imageSmoothingEnabled = false;
 
   const spriteSheet = await createSpriteSheet(sprites, [
     ['pac-man', [473, 0, 12, 14]],
-    ...tiles.flatMap( // Complex, but can be simplified over time
-      (row, i) => row.map(
-        (tile, i) => [`tile-${tile.x}-${tile.y}`, [tile.x, tile.y, TILE_PIXEL_WIDTH, TILE_PIXEL_HEIGHT]] as SpriteDefinition
-      ),
+    ...tiles.flatMap(
+      // Complex, but can be simplified over time
+      (row, i) =>
+        row.map(
+          (tile, i) =>
+            [
+              `tile-${tile.x}-${tile.y}`,
+              [tile.x, tile.y, TILE_PIXEL_WIDTH, TILE_PIXEL_HEIGHT],
+            ] as SpriteDefinition,
+        ),
     ),
   ]);
 
