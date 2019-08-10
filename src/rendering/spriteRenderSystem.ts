@@ -23,8 +23,6 @@ export const createSpriteRenderSystem = (
   context.drawImage(
     sprite,
     ...project(
-      context.canvas.width,
-      context.canvas.height,
       x,
       y,
       width,
@@ -36,6 +34,7 @@ export const createSpriteRenderSystem = (
 export default (
   context: CanvasRenderingContext2D,
   spriteSheet: Map<string, ImageBitmap>,
+  project2D: Project2D,
 ) =>
   createSystem<SpriteRenderable>(
     createSpriteRenderSystem(context, spriteSheet, project2D),

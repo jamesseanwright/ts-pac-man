@@ -3,7 +3,7 @@ import createSpriteRenderable, { SpriteRenderable } from '../rendering/spriteRen
 import { System } from '../system';
 
 const bindPacman = (spriteRenderSystem: System<SpriteRenderable>) => {
-  const positionable = createPositionable(0, 0, 9, 9);
+  const positionable = createPositionable(0, 0, 0.015, 0.015);
   const spriteRenderable = createSpriteRenderable('pac-man', positionable);
 
   spriteRenderSystem.register(spriteRenderable);

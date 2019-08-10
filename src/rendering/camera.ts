@@ -1,17 +1,16 @@
 type Points2D = [number, number, number, number];
 
 export type Project2D = (
-  viewportWidth: number,
-  viewportHeight: number,
   x: number,
   y: number,
   width: number,
   height: number,
 ) => Points2D;
 
-const project2D = (
+const createProject2D = (
   viewportWidth: number,
   viewportHeight: number,
+) => (
   x: number,
   y: number,
   width: number,
@@ -23,4 +22,4 @@ const project2D = (
   height * viewportHeight,
 ];
 
-export default project2D;
+export default createProject2D;
