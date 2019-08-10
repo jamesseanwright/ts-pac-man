@@ -8,8 +8,7 @@ describe('spriteRenderSystem', () => {
     height: 480,
   };
 
-  const project = (...args: number[]) =>
-    args.slice(2, 6) as [number, number, number, number];
+  const project = (...args: [number, number, number, number]) => args;
   const positionable = createPositionable(10, 15, 32, 32);
 
   const spriteSheet = new Map<string, ImageBitmap>([
