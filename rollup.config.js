@@ -1,9 +1,11 @@
-import resolve from 'rollup-plugin-node-resolve';
-import { terser } from 'rollup-plugin-terser';
-import typescriptPlugin from 'rollup-plugin-typescript2';
-import typescript from 'typescript';
+'use strict';
 
-export default {
+const resolve = require('rollup-plugin-node-resolve');
+const { terser } = require('rollup-plugin-terser');
+const typescriptPlugin = require('rollup-plugin-typescript2');
+const typescript = require('typescript');
+
+module.exports = {
   input: 'src/index.ts',
   output: {
     dir: 'dist',
@@ -22,4 +24,7 @@ export default {
       },
     }),
   ],
+  watch: {
+    include: "src/**/*.ts",
+  },
 };
