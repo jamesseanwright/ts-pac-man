@@ -5,7 +5,7 @@ import createSpriteRenderable, {
 import { System } from '../system';
 
 const bindBlinky = (spriteRenderSystem: System<SpriteRenderable>) => {
-  const positionable = createPositionable(0.3, 0.3, 0.056, 0.056);
+  const positionable = createPositionable(0.3, 0.3, 0.061, 0.056);
   const spriteRenderable = createSpriteRenderable('blinky', positionable);
 
   spriteRenderSystem.register(spriteRenderable);
