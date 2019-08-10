@@ -46,7 +46,7 @@ const computeTiles = () => {
   const tiles: Tile[][] = [];
   let row = 0;
 
-  // TODO: get functional with this?
+  // TODO: get functional with this!
   for (let x = 0; x < canvas.width; x += TILE_PIXEL_WIDTH) {
     tiles[x] = [];
 
