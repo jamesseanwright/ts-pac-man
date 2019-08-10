@@ -1,6 +1,7 @@
 import createSpriteSheet, { SpriteDefinition } from './spriteSheet';
 import createSpriteRenderSystem from './rendering/spriteRenderSystem';
 import bindPacman from './entities/pacman';
+import bindBlinky from './entities/blinky';
 import createProject2D from './rendering/camera';
 
 const sprites = document.body.querySelector<HTMLImageElement>('#spriteSheet');
@@ -68,6 +69,7 @@ context.imageSmoothingEnabled = false;
 
   const spriteSheet = await createSpriteSheet(sprites, [
     ['pac-man', [473, 0, 12, 14]],
+    ['blinky', [457, 65, 14, 14]],
     ...tiles.flatMap(
       // Complex, but can be simplified over time
       (row, i) =>
@@ -88,6 +90,7 @@ context.imageSmoothingEnabled = false;
   );
 
   bindPacman(spriteRenderSystem);
+  bindBlinky(spriteRenderSystem);
 
   const loop = (time: number) => {
     spriteRenderSystem.update(time);
