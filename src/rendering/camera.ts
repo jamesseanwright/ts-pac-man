@@ -1,4 +1,4 @@
-type Points2D = [number, number, number, number];
+export type Points2D = [number, number, number, number];
 
 export type Project2D = (
   x: number,

@@ -7,6 +7,10 @@
     "outDir": "dist",
     "target": "ES6",
     "module": "esnext",
+    "lib": [
+      "dom",
+      "esnext"
+    ],
     "removeComments": true
   }
 }
