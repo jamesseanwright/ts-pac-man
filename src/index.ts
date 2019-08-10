@@ -31,6 +31,29 @@ const loadSpriteSheet = () =>
     sheet.src = '/images/spritesheet.png';
   });
 
+// TODO: abstract tile computation somewhere
+const TILE_PIXEL_WIDTH = 21
+const TILE_PIXEL_HEIGHT = 20;
+const TILE_SPRITE_SHEET_START_X = 228;
+const TILE_SPRITE_SHEET_START_Y = 0;
+
+const computeTiles = () => {
+  const tiles: object[][] = [];
+
+  // TODO: get functional with this?
+  for (let i = 0; i < canvas.width; i += TILE_PIXEL_WIDTH) {
+    tiles[i] = [];
+
+    for (let j = 0; j < canvas.height; j += TILE_PIXEL_HEIGHT) {
+      tiles[i][j] = { i, j };
+    }
+  }
+
+  return tiles;
+};
+
+console.log(computeTiles());
+
 context.imageSmoothingEnabled = false;
 
 (async () => {
