@@ -1,7 +1,5 @@
 const createKeyboard = (eventTarget: Window, supportedKeys: string[]) => {
-  const keys = new Map<string, boolean>(
-    supportedKeys.map(key => [key, false]),
-  );
+  const keys = new Map<string, boolean>(supportedKeys.map(key => [key, false]));
 
   const updateKey = (key: string, isPressed: boolean) => {
     if (keys.has(key)) {
@@ -15,7 +13,7 @@ const createKeyboard = (eventTarget: Window, supportedKeys: string[]) => {
   return {
     isKeyPressed(key: string) {
       return Boolean(keys.get(key));
-    }
+    },
   };
 };
 
