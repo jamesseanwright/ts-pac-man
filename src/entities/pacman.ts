@@ -1,5 +1,7 @@
 import createPositionable from '../positionable';
-import createSpriteRenderable, { SpriteRenderable } from '../rendering/spriteRenderable';
+import createSpriteRenderable, {
+  SpriteRenderable,
+} from '../rendering/spriteRenderable';
 import { System } from '../system';
 
 const bindPacman = (spriteRenderSystem: System<SpriteRenderable>) => {

@@ -7,10 +7,7 @@ export type Project2D = (
   height: number,
 ) => Points2D;
 
-const createProject2D = (
-  viewportWidth: number,
-  viewportHeight: number,
-) => (
+const createProject2D = (viewportWidth: number, viewportHeight: number) => (
   x: number,
   y: number,
   width: number,

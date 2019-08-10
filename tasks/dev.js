@@ -10,7 +10,7 @@ const config = require('../rollup.config');
 const PORT = 8080;
 
 const fileServer = new Server('./dist', {
-  'Cache-Control': 'no-cache, must-revalidate'
+  'Cache-Control': 'no-cache, must-revalidate',
 });
 
 const serveFile = fileServer.serve.bind(fileServer);
@@ -23,7 +23,9 @@ watcher.on('event', event => {
   } else if (event.code === 'BUNDLE_END') {
     console.log(`Bundling complete after ${event.duration} ms`);
   } else if (event.code === 'ERROR') {
-    console.log(`Error thrown! Please fix this and try again:\n${event.error}\n`);
+    console.log(
+      `Error thrown! Please fix this and try again:\n${event.error}\n`,
+    );
   } else if (event.code === 'FATAL') {
     console.error(`Fatal error!\n${event.error}\n`);
     server.close();
@@ -31,5 +33,5 @@ watcher.on('event', event => {
 });
 
 server.listen(PORT, () => {
-  console.log(`File server listening on port ${PORT}...`)
+  console.log(`File server listening on port ${PORT}...`);
 });

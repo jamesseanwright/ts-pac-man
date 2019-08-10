@@ -12,7 +12,8 @@ if (!canvas) {
 
 const context = canvas.getContext('2d');
 
-if (!context) { // TODO: abstract this pattern with a guard?
+if (!context) {
+  // TODO: abstract this pattern with a guard?
   throw new Error('Game canvas could not be found in the DOM!');
 }
 
@@ -37,7 +38,11 @@ const loadSpriteSheet = () =>
     ['pac-man', [473, 0, 12, 14]],
   ]);
 
-  const spriteRenderSystem = createSpriteRenderSystem(context, spriteSheet, project2D);
+  const spriteRenderSystem = createSpriteRenderSystem(
+    context,
+    spriteSheet,
+    project2D,
+  );
 
   bindPacman(spriteRenderSystem);
 

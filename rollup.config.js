@@ -18,13 +18,14 @@ module.exports = ({ prod }) => ({
     typescriptPlugin({
       typescript,
     }),
-    prod && terser({
-      mangle: {
-        toplevel: true,
-      },
-    }),
+    prod &&
+      terser({
+        mangle: {
+          toplevel: true,
+        },
+      }),
   ],
   watch: {
-    include: "src/**/*.ts",
+    include: 'src/**/*.ts',
   },
 });
