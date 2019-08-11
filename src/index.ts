@@ -45,6 +45,7 @@ context.imageSmoothingEnabled = false;
 
     // Map tiles keyed by type
     ['A', [228, 0, 4, 4]],
+    ['B', [248, 20, 4, 4]],
     ['C', [233, 0, 4, 4]],
     ['D', [338, 0, 4, 4]],
     ['G', [343, 0, 4, 4]],

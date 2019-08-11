@@ -37,11 +37,12 @@ type Tile =
   | Gate
   | Walkable;
 
-const fill = (length: number, tile: Tile): Tile[] => Array(length).fill(tile);
+const fill = (length: number, tile: Tile | Tile[]) => Array(length).fill(tile);
 
 const tiles: Tile[][] = [
   ['A0', ...fill(25, 'C0'), 'G1', 'D0', 'G0', ...fill(25, 'C0'), 'A1'],
-  ['C1', ...fill(53, 'O'), 'C1'],
+  ...fill(4, ['C1', ...fill(53, 'O'), 'C1']),
+  ['C1', ...fill(4, 'O'), 'B0', ...fill(4, 'D0'), 'B1', ...fill(4, 'O'), 'B0'],
 ];
 
 const isWalkable = (tile: Tile) => tile === 'O';
