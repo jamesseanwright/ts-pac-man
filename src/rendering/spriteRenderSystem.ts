@@ -1,30 +1,21 @@
 import createSystem from '../system';
-import project2D, { Project2D } from './camera';
+import project2D, { Project2D, Points2D } from './camera';
 import { SpriteRenderable } from './spriteRenderable';
 import { Rotatable } from '../rotatable';
 import { Positionable } from '../positionable';
 
 export type Context = Pick<
   CanvasRenderingContext2D,
-  'drawImage' | 'translate' | 'rotate' | 'resetTransform'
+  'drawImage' | 'translate' | 'rotate' | 'resetTransform' | 'strokeStyle' | 'strokeRect'
 >;
 
-const rotate = (
+const transform = (
   context: Context,
-  project: Project2D,
+  [x, y, width, height]: Points2D,
   rotatable: Rotatable,
-  positionable: Positionable,
 ) => {
-  const { pos, width, height } = positionable;
-
-  const [x, y, projectedWidth, projectedHeight] = project(
-    pos[0],
-    pos[1],
-    width,
-    height,
-  );
-
-  context.translate(x + projectedWidth / 2, y + projectedHeight / 2);
+  context.translate(x, y);
+  context.translate(x + width / 2, y + height / 2);
   context.rotate(rotatable.angle);
 };
 
@@ -41,12 +32,17 @@ export const createSpriteRenderSystem = (
 
   const [x, y] = component.positionable.pos;
   const { width, height } = component.positionable;
+  const projectedPoints = project(x, y, width, height);
+  const [, , projectedWidth, projectedHeight] = projectedPoints;
 
-  if (component.rotatable) {
-    rotate(context, project, component.rotatable, component.positionable);
+  transform(context, projectedPoints, component.rotatable);
+
+  if (window.localStorage.getItem('debugSprites')) {
+    context.strokeStyle = 'red';
+    context.strokeRect(-projectedWidth / 2, -projectedHeight / 2, projectedWidth, projectedHeight);
   }
 
-  context.drawImage(sprite, ...project(x, y, width, height));
+  context.drawImage(sprite, -projectedWidth / 2, -projectedHeight / 2, projectedWidth, projectedHeight);
   context.resetTransform();
 };
 

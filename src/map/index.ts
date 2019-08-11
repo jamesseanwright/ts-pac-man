@@ -4,6 +4,7 @@ import createSpriteRenderable, {
 } from '../rendering/spriteRenderable';
 import { System } from '../system';
 import createPositionable from '../positionable';
+import createRotatable from '../rotatable';
 
 /* 4x4px is the most atomic tile size,
  * but a single walkable tile is 16x16,
@@ -47,7 +48,13 @@ const tiles: Tile[][] = [
   ['A0', ...fill(25, 'C0'), 'G1', 'D0', 'G0', ...fill(25, 'C0'), 'A1'],
 ];
 
+const toRadians = (rawRotation: string) => {
+  const rotation = parseInt(rawRotation, 10);
+  return rotation * 1.57;
+}
+
 // TODO: Should this live under entities?
+// TODO: Test!
 const bindMap = (spriteRenderSystem: System<SpriteRenderable>) => {
   tiles.forEach((rowTiles, row) => {
     rowTiles.forEach((tile, column) => {
@@ -60,7 +67,8 @@ const bindMap = (spriteRenderSystem: System<SpriteRenderable>) => {
         TILE_HEIGHT,
       );
 
-      const spriteRenderable = createSpriteRenderable(type, positionable);
+      const rotatable = createRotatable(toRadians(rotation));
+      const spriteRenderable = createSpriteRenderable(type, positionable, rotatable);
 
       spriteRenderSystem.register(spriteRenderable);
     });
