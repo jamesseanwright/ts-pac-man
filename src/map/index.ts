@@ -1,7 +1,9 @@
-import spriteRenderSystem from "../rendering/spriteRenderSystem";
-import createSpriteRenderable, { SpriteRenderable } from "../rendering/spriteRenderable";
-import { System } from "../system";
-import createPositionable from "../positionable";
+import spriteRenderSystem from '../rendering/spriteRenderSystem';
+import createSpriteRenderable, {
+  SpriteRenderable,
+} from '../rendering/spriteRenderable';
+import { System } from '../system';
+import createPositionable from '../positionable';
 
 /* 4x4px is the most atomic tile size,
  * but a single walkable tile is 16x16,
@@ -39,8 +41,7 @@ type Tile =
   | Gate
   | Walkable;
 
-const fill = (length: number, tile: Tile): Tile[] =>
-  Array(length).fill(tile);
+const fill = (length: number, tile: Tile): Tile[] => Array(length).fill(tile);
 
 const tiles: Tile[][] = [
   ['A0', ...fill(25, 'C0'), 'G1', 'D0', 'G0', ...fill(25, 'C0'), 'A1'],
@@ -56,7 +57,7 @@ const bindMap = (spriteRenderSystem: System<SpriteRenderable>) => {
         column * TILE_WIDTH,
         row * TILE_HEIGHT,
         TILE_WIDTH,
-        TILE_HEIGHT
+        TILE_HEIGHT,
       );
 
       const spriteRenderable = createSpriteRenderable(type, positionable);
