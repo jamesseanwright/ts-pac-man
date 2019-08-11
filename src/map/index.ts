@@ -52,9 +52,12 @@ const tiles: Tile[][] = [
   ['C1', ...fill(4, 'O'), 'B0', ...fill(4, 'D0'), 'B1', ...fill(4, 'O'), 'B0', 'B1', ...fill(4, 'O'), 'B0', ...fill(12, 'D0'), 'B1', ...fill(4, 'O'), 'B0', 'B1', ...fill(4, 'O'), 'B0', ...fill(4, 'D0'), 'B1', ...fill(4, 'O'), 'C1'],
   ['C1', ...fill(4, 'O'), 'B3', ...fill(4, 'D2'), 'B2', ...fill(4, 'O'), 'D3', 'D1', ...fill(4, 'O'), 'B3', ...fill(4, 'D2'), ...fill(4, 'O'), ...fill(4, 'D2'), 'B2', ...fill(4, 'O'), 'D3', 'D1', ...fill(4, 'O'), 'B3', ...fill(4, 'D2'), 'B2', ...fill(4, 'O'), 'C1'],
   ['C1', ...fill(14, 'O'), 'D3', 'D1', ...fill(9, 'O'), 'B1', ...fill(2, 'O'), 'B0', ...fill(9, 'O'), 'D3', 'D1', ...fill(14, 'O'), 'C1'],
-  ...fill(3, ['C1', ...fill(14, 'O'), 'D3', 'D1', ...fill(10, 'O'), 'D3', 'D1', ...fill(10, 'O'), 'D3', 'D1', ...fill(14, 'O'), 'C1']),
+  ...fill(2, ['C1', ...fill(14, 'O'), 'D3', 'D1', ...fill(10, 'O'), 'D3', 'D1', ...fill(10, 'O'), 'D3', 'D1', ...fill(14, 'O'), 'C1']),
+  ['C1', ...fill(14, 'O'), 'D3', 'O', 'B3', ...fill(4, 'D2'), ...fill(5, 'O'), 'D3', 'D1', ...fill(5, 'O'), ...fill(4, 'D2'), 'B2', 'O', 'D1', ...fill(14, 'O'), 'C1'],
+  ['A3', ...fill(9, 'C0'), 'A1', ...fill(4, 'O'), 'D3', ...fill(6, 'O'), 'B1', ...fill(4, 'O'), 'D3', 'D1', ...fill(4, 'O'), 'B0', ...fill(6, 'O'), "D1", ...fill(4, 'O'), 'A0', ...fill(9, 'C0'), 'A2'],
 ];
 
+// TODO: corners probably need to be walkable...
 const isWalkable = (tile: Tile): tile is Walkable => tile === 'O';
 
 const toRadians = (rawRotation: string) => {

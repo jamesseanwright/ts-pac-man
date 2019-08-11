@@ -40,8 +40,8 @@ context.imageSmoothingEnabled = false;
 
   // TODO: trim sprite sheet to keep only necessary sprites
   const spriteSheet = await createSpriteSheet(sprites, [
-    ['pac-man', [473, 0, 12, 14]],
-    ['blinky', [457, 65, 14, 14]],
+    // ['pac-man', [473, 0, 12, 14]],
+    // ['blinky', [457, 65, 14, 14]],
 
     // Map tiles keyed by type
     ['A', [228, 0, 4, 4]],
