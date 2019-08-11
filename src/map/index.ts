@@ -51,7 +51,7 @@ const tiles: Tile[][] = [
 const toRadians = (rawRotation: string) => {
   const rotation = parseInt(rawRotation, 10);
   return rotation * 1.57;
-}
+};
 
 // TODO: Should this live under entities?
 // TODO: Test!
@@ -68,7 +68,11 @@ const bindMap = (spriteRenderSystem: System<SpriteRenderable>) => {
       );
 
       const rotatable = createRotatable(toRadians(rotation));
-      const spriteRenderable = createSpriteRenderable(type, positionable, rotatable);
+      const spriteRenderable = createSpriteRenderable(
+        type,
+        positionable,
+        rotatable,
+      );
 
       spriteRenderSystem.register(spriteRenderable);
     });
