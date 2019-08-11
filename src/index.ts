@@ -3,6 +3,7 @@ import createSpriteRenderSystem from './rendering/spriteRenderSystem';
 import bindPacman from './entities/pacman';
 import bindBlinky from './entities/blinky';
 import createProject2D from './rendering/camera';
+import bindMap from './map';
 
 const sprites = document.body.querySelector<HTMLImageElement>('#spriteSheet');
 const canvas = document.body.querySelector<HTMLCanvasElement>('#game');
@@ -32,55 +33,21 @@ const loadSpriteSheet = () =>
     sheet.src = '/images/spritesheet.png';
   });
 
-// TODO: abstract all this tile stuff
-const TILE_PIXEL_WIDTH = 21;
-const TILE_PIXEL_HEIGHT = 20;
-const TILE_SPRITE_SHEET_START_X = 228;
-const TILE_SPRITE_SHEET_START_Y = 0;
-
-interface Tile {
-  // TODO: reuse positionable?!
-  x: number;
-  y: number;
-}
-
-const computeTiles = () => {
-  const tiles: Tile[][] = [];
-  let row = 0;
-
-  // TODO: get functional with this!
-  for (let x = 0; x < canvas.width; x += TILE_PIXEL_WIDTH) {
-    tiles[x] = [];
-
-    for (let y = 0; y < canvas.height; y += TILE_PIXEL_HEIGHT) {
-      tiles[x][y] = { x, y };
-    }
-  }
-
-  return tiles;
-};
-
-const tiles = computeTiles();
-
 context.imageSmoothingEnabled = false;
 
 (async () => {
   const sprites = await loadSpriteSheet();
 
+  // TODO: trim sprite sheet to keep only necessary sprites
   const spriteSheet = await createSpriteSheet(sprites, [
     ['pac-man', [473, 0, 12, 14]],
     ['blinky', [457, 65, 14, 14]],
-    ...tiles.flatMap(
-      // Complex, but can be simplified over time
-      (row, i) =>
-        row.map(
-          (tile, i) =>
-            [
-              `tile-${tile.x}-${tile.y}`,
-              [tile.x, tile.y, TILE_PIXEL_WIDTH, TILE_PIXEL_HEIGHT],
-            ] as SpriteDefinition,
-        ),
-    ),
+
+    // Map tiles keyed by type
+    ['A', [228, 0, 4, 4]],
+    ['C', [233, 0, 4, 4]],
+    ['D', [338, 0, 4, 4]],
+    ['G', [343, 0, 4, 4]],
   ]);
 
   const spriteRenderSystem = createSpriteRenderSystem(
@@ -89,6 +56,7 @@ context.imageSmoothingEnabled = false;
     project2D,
   );
 
+  bindMap(spriteRenderSystem);
   bindPacman(spriteRenderSystem);
   bindBlinky(spriteRenderSystem);
 
