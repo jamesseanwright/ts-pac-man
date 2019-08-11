@@ -6,17 +6,12 @@ import { System } from '../system';
 import createPositionable from '../positionable';
 import createRotatable from '../rotatable';
 
-/* 4x4px is the most atomic tile size,
- * but a single walkable tile is 16x16,
- * so these are recognised as being larger
- * to make movement logic more simple.
+/* 4x4px is the most atomic tile size.
  *
  * TODO: Use aspect ratio instead of
  * separate widths and heights. */
 const TILE_WIDTH = 0.0177;
 const TILE_HEIGHT = 0.0161;
-const WALKABLE_WIDTH = TILE_WIDTH * 4;
-const WALKABLE_HEIGHT = TILE_HEIGHT * 4;
 
 /* Numbers next to tile type represent rotation
  * by increments of 1.57 rad/90 deg
@@ -46,7 +41,10 @@ const fill = (length: number, tile: Tile): Tile[] => Array(length).fill(tile);
 
 const tiles: Tile[][] = [
   ['A0', ...fill(25, 'C0'), 'G1', 'D0', 'G0', ...fill(25, 'C0'), 'A1'],
+  ['C1', ...fill(53, 'O'), 'C1'],
 ];
+
+const isWalkable = (tile: Tile) => tile === 'O';
 
 const toRadians = (rawRotation: string) => {
   const rotation = parseInt(rawRotation, 10);
@@ -58,6 +56,10 @@ const toRadians = (rawRotation: string) => {
 const bindMap = (spriteRenderSystem: System<SpriteRenderable>) => {
   tiles.forEach((rowTiles, row) => {
     rowTiles.forEach((tile, column) => {
+      if (isWalkable(tile)) {
+        return;
+      }
+
       const [type, rotation = '0'] = tile;
 
       const positionable = createPositionable(
