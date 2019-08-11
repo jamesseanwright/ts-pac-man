@@ -37,15 +37,19 @@ type Tile =
   | Gate
   | Walkable;
 
+// TODO: resolve implicit any in return
 const fill = (length: number, tile: Tile | Tile[]) => Array(length).fill(tile);
+
+const standardWalkway = fill(4, 'O');
 
 const tiles: Tile[][] = [
   ['A0', ...fill(25, 'C0'), 'G1', 'D0', 'G0', ...fill(25, 'C0'), 'A1'],
   ...fill(4, ['C1', ...fill(53, 'O'), 'C1']),
-  ['C1', ...fill(4, 'O'), 'B0', ...fill(4, 'D0'), 'B1', ...fill(4, 'O'), 'B0'],
+  ['C1', ...fill(4, 'O'), 'B0', ...fill(4, 'D0'), 'B1', ...fill(4, 'O'), 'B0', ...fill(6, 'D0'), 'B1', ...fill(4, 'O'), 'D3', 'D1', ...fill(4, 'O'), 'B0', ...fill(6, 'D0'), 'B1', ...fill(4, 'O'), 'B0', ...fill(4, 'D0'), 'B1', ...fill(4, 'O'), 'C1'],
+  ...fill(2, ['C1', ...fill(4, 'O'), 'D3', ...fill(4, 'O'), 'D1', ...fill(4, 'O'), 'D3', ...fill(6, 'O'), 'D1', ...fill(4, 'O'), 'D3', 'D1', ...fill(4, 'O'), 'D3', ...fill(6, 'O'), 'D1', ...fill(4, 'O'), 'D3', ...fill(4, 'O'), 'D1', ...fill(4, 'O'), 'C1']),
 ];
 
-const isWalkable = (tile: Tile) => tile === 'O';
+const isWalkable = (tile: Tile): tile is Walkable => tile === 'O';
 
 const toRadians = (rawRotation: string) => {
   const rotation = parseInt(rawRotation, 10);
