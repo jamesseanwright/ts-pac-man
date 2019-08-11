@@ -1,8 +1,24 @@
 import createSystem from '../system';
 import project2D, { Project2D } from './camera';
 import { SpriteRenderable } from './spriteRenderable';
+import { Rotatable } from '../rotatable';
+import { Positionable } from '../positionable';
 
-export type Context = Pick<CanvasRenderingContext2D, 'drawImage' | 'rotate' | 'resetTransform'>;
+export type Context = Pick<
+  CanvasRenderingContext2D,
+  | 'drawImage'
+  | 'translate'
+  | 'rotate'
+  | 'resetTransform'
+>;
+
+const rotate = (context: Context, project: Project2D, rotatable: Rotatable, positionable: Positionable) => {
+  const { pos, width, height } = positionable;
+  const [x, y, projectedWidth, projectedHeight] = project(pos[0], pos[1], width, height);
+
+  context.translate(x + projectedWidth / 2, y + projectedHeight / 2);
+  context.rotate(rotatable.angle);
+};
 
 export const createSpriteRenderSystem = (
   context: Context,
@@ -19,7 +35,7 @@ export const createSpriteRenderSystem = (
   const { width, height } = component.positionable;
 
   if (component.rotatable) {
-    context.rotate(component.rotatable.angle);
+    rotate(context, project, component.rotatable, component.positionable);
   }
 
   context.drawImage(sprite, ...project(x, y, width, height));
