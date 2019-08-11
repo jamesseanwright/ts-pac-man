@@ -3,19 +3,21 @@ import createSpriteRenderable, { SpriteRenderable } from "../rendering/spriteRen
 import { System } from "../system";
 import createPositionable from "../positionable";
 
+/* 4x4px is the most atomic tile size,
+ * but a single walkable tile is 16x16,
+ * so these are recognised as being larger
+ * to make movement logic more simple.
+ *
+ * TODO: Use aspect ratio instead of
+ * separate widths and heights. */
 const TILE_WIDTH = 0.0176;
 const TILE_HEIGHT = 0.0161;
+const WALKABLE_WIDTH = TILE_WIDTH * 4;
+const WALKABLE_HEIGHT = TILE_HEIGHT * 4;
 
-/* Walkable tiles are seemingly
- * 16x16, but the edge walls are
- * 4x smaller. With this in mind,
- * 4x4 is the most atomic tile size.
- *
- * Numbers next to tile type represent
- * rotation by increments of 1.57 rad/90 deg
- * i.e. 0 => 0, 1 => 1.57, 2 => 3.14, 3 => 4.71
- */
-
+/* Numbers next to tile type represent rotation
+ * by increments of 1.57 rad/90 deg
+ * i.e. 0 => 0, 1 => 1.57, 2 => 3.14, 3 => 4.71 */
 type OuterCorner = 'A0' | 'A1' | 'A2' | 'A3';
 type InnerCorner = 'B0' | 'B1' | 'B2' | 'B3';
 type StraightWall = 'C0' | 'C1';
@@ -60,7 +62,7 @@ const bindMap = (spriteRenderSystem: System<SpriteRenderable>) => {
       const spriteRenderable = createSpriteRenderable(type, positionable);
 
       spriteRenderSystem.register(spriteRenderable);
-    })
+    });
   });
 };
 
