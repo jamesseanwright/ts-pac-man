@@ -6,12 +6,7 @@ import { Positionable } from '../positionable';
 
 export type Context = Pick<
   CanvasRenderingContext2D,
-  | 'drawImage'
-  | 'translate'
-  | 'rotate'
-  | 'resetTransform'
-  | 'strokeStyle'
-  | 'strokeRect'
+  'drawImage' | 'translate' | 'rotate' | 'resetTransform' | 'strokeStyle' | 'strokeRect'
 >;
 
 const transform = (
@@ -19,7 +14,6 @@ const transform = (
   [x, y, width, height]: Points2D,
   rotatable: Rotatable,
 ) => {
-  context.translate(x, y);
   context.translate(x + width / 2, y + height / 2);
   context.rotate(rotatable.angle);
 };
@@ -42,23 +36,7 @@ export const createSpriteRenderSystem = (
 
   transform(context, projectedPoints, component.rotatable);
 
-  if (window.localStorage.getItem('debugSprites')) {
-    context.strokeStyle = 'red';
-    context.strokeRect(
-      -projectedWidth / 2,
-      -projectedHeight / 2,
-      projectedWidth,
-      projectedHeight,
-    );
-  }
-
-  context.drawImage(
-    sprite,
-    -projectedWidth / 2,
-    -projectedHeight / 2,
-    projectedWidth,
-    projectedHeight,
-  );
+  context.drawImage(sprite, -projectedWidth / 2, -projectedHeight / 2, projectedWidth, projectedHeight);
   context.resetTransform();
 };
 
