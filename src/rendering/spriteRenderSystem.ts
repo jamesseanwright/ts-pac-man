@@ -16,6 +16,7 @@ const rotate = (
   positionable: Positionable,
 ) => {
   const { pos, width, height } = positionable;
+
   const [x, y, projectedWidth, projectedHeight] = project(
     pos[0],
     pos[1],
