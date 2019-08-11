@@ -13,7 +13,7 @@ import createRotatable from '../rotatable';
  *
  * TODO: Use aspect ratio instead of
  * separate widths and heights. */
-const TILE_WIDTH = 0.0176;
+const TILE_WIDTH = 0.0177;
 const TILE_HEIGHT = 0.0161;
 const WALKABLE_WIDTH = TILE_WIDTH * 4;
 const WALKABLE_HEIGHT = TILE_HEIGHT * 4;
