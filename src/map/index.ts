@@ -40,11 +40,9 @@ type Tile =
 // TODO: resolve implicit any in return
 const fill = (length: number, tile: Tile | Tile[]) => Array(length).fill(tile);
 
-const standardWalkway = fill(4, 'O');
-
 const tiles: Tile[][] = [
   ['A0', ...fill(25, 'C0'), 'G1', 'D0', 'G0', ...fill(25, 'C0'), 'A1'],
-  ...fill(4, ['C1', ...fill(54, 'O'), 'C1']),
+  ...fill(4, ['C1', ...fill(26, 'O'), 'D3', 'D1', ...fill(26, 'O'), 'C1']),
   ['C1', ...fill(4, 'O'), 'B0', ...fill(4, 'D0'), 'B1', ...fill(4, 'O'), 'B0', ...fill(6, 'D0'), 'B1', ...fill(4, 'O'), 'D3', 'D1', ...fill(4, 'O'), 'B0', ...fill(6, 'D0'), 'B1', ...fill(4, 'O'), 'B0', ...fill(4, 'D0'), 'B1', ...fill(4, 'O'), 'C1'],
   ...fill(2, ['C1', ...fill(4, 'O'), 'D3', ...fill(4, 'O'), 'D1', ...fill(4, 'O'), 'D3', ...fill(6, 'O'), 'D1', ...fill(4, 'O'), 'D3', 'D1', ...fill(4, 'O'), 'D3', ...fill(6, 'O'), 'D1', ...fill(4, 'O'), 'D3', ...fill(4, 'O'), 'D1', ...fill(4, 'O'), 'C1']),
   ['C1', ...fill(4, 'O'), 'B3', ...fill(4, 'D2'), 'B2', ...fill(4, 'O'), 'B3', ...fill(6, 'D2'), 'B2', ...fill(4, 'O'), 'B3', 'B2', ...fill(4, 'O'), 'B3', ...fill(6, 'D2'), 'B2', ...fill(4, 'O'), 'B3', ...fill(4, 'D2'), 'B2', ...fill(4, 'O'), 'C1'],
@@ -55,6 +53,7 @@ const tiles: Tile[][] = [
   ...fill(2, ['C1', ...fill(14, 'O'), 'D3', 'D1', ...fill(10, 'O'), 'D3', 'D1', ...fill(10, 'O'), 'D3', 'D1', ...fill(14, 'O'), 'C1']),
   ['C1', ...fill(14, 'O'), 'D3', 'O', 'B3', ...fill(4, 'D2'), ...fill(5, 'O'), 'D3', 'D1', ...fill(5, 'O'), ...fill(4, 'D2'), 'B2', 'O', 'D1', ...fill(14, 'O'), 'C1'],
   ['A3', ...fill(9, 'C0'), 'A1', ...fill(4, 'O'), 'D3', ...fill(6, 'O'), 'B1', ...fill(4, 'O'), 'D3', 'D1', ...fill(4, 'O'), 'B0', ...fill(6, 'O'), "D1", ...fill(4, 'O'), 'A0', ...fill(9, 'C0'), 'A2'],
+  [...fill(10, 'O'), 'C1', ...fill(4, 'O'), 'D3', ...fill(2, 'O'), 'B2', ...fill(4, 'O'), 'D3', 'D1', ...fill(4, 'O'), 'B0', ...fill(6, 'O'), "D1", ...fill(4, 'O'), 'A0', ...fill(9, 'C0'), 'A2'],
 ];
 
 // TODO: corners probably need to be walkable...
