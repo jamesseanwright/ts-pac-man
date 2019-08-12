@@ -56,7 +56,7 @@ const tiles: Tile[][] = [
   [...fill(10, 'O'), 'C1', ...fill(4, 'O'), 'D3', ...fill(2, 'O'), ...fill(4, 'D2'), 'B2', ...fill(4, 'O'), 'B3', 'B2', ...fill(4, 'O'), "B3", ...fill(4, 'D2'), ...fill(2, 'O'), 'D1', ...fill(4, 'O'), 'C1', ...fill(10, 'O')],
   [...fill(10, 'O'), 'C1', ...fill(4, 'O'), 'D3', 'O', 'B0', ...fill(20, 'O'), 'B1', 'O', 'D1', ...fill(4, 'O'), 'C1', ...fill(10, 'O')],
   ...fill(3, [...fill(10, 'O'), 'C1', ...fill(4, 'O'), 'D3', 'D1', ...fill(22, 'O'), 'D3', 'D1', ...fill(4, 'O'), 'C1', ...fill(10, 'O')]),
-  [...fill(10, 'O'), 'C1', ...fill(4, 'O'), 'D3', 'D1', ...fill(4, 'O'), 'F0', ...fill(4, 'C0'), ...fill(4, 'H'), ...fill(4, 'C0'), 'F1'],
+  [...fill(10, 'O'), 'C1', ...fill(4, 'O'), 'D3', 'D1', ...fill(4, 'O'), 'F0', ...fill(4, 'C0'), ...fill(4, 'H'), ...fill(4, 'C0'), 'F1', ...fill(4, 'O'), 'D3', 'D1', ...fill(4, 'O'), 'C1', ...fill(10, 'O')],
 ];
 
 // TODO: corners probably need to be walkable...
