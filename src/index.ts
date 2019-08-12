@@ -48,7 +48,9 @@ context.imageSmoothingEnabled = false;
     ['B', [248, 20, 4, 4]],
     ['C', [233, 0, 4, 4]],
     ['D', [338, 0, 4, 4]],
+    ['F', [312, 100, 4, 4]],
     ['G', [343, 0, 4, 4]],
+    ['H', [332, 100, 4, 4]],
   ]);
 
   const spriteRenderSystem = createSpriteRenderSystem(
@@ -58,8 +60,8 @@ context.imageSmoothingEnabled = false;
   );
 
   bindMap(spriteRenderSystem);
-  bindPacman(spriteRenderSystem);
-  bindBlinky(spriteRenderSystem);
+  // bindPacman(spriteRenderSystem);
+  // bindBlinky(spriteRenderSystem);
 
   const loop = (time: number) => {
     spriteRenderSystem.update(time);
