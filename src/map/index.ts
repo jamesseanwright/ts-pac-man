@@ -1,8 +1,6 @@
-import spriteRenderSystem from '../rendering/spriteRenderSystem';
 import createSpriteRenderable, {
   SpriteRenderable,
 } from '../rendering/spriteRenderable';
-import { System } from '../system';
 import createPositionable from '../positionable';
 import createRotatable from '../rotatable';
 
@@ -93,7 +91,7 @@ const toRadians = (rawRotation: string) => {
 
 // TODO: Should this live under entities?
 // TODO: Test with injectable map!
-const bindMap = (spriteRenderSystem: System<SpriteRenderable>) => {
+const bindMap = (: System<SpriteRenderable>) => {
   tiles.forEach((rowTiles, row) => {
     rowTiles.forEach((tile, column) => {
       if (isWalkable(tile)) {
