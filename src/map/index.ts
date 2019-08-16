@@ -91,7 +91,7 @@ const toRadians = (rawRotation: string) => {
 
 // TODO: Should this live under entities?
 // TODO: Test with injectable map!
-const bindMap = (: System<SpriteRenderable>) => {
+const bindMap = (spriteRenderSystem: System<SpriteRenderable>) => {
   tiles.forEach((rowTiles, row) => {
     rowTiles.forEach((tile, column) => {
       if (isWalkable(tile)) {
