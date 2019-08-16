@@ -5,7 +5,7 @@ import { Rotatable } from '../rotatable';
 
 export type Context = Pick<
   CanvasRenderingContext2D,
-  'drawImage' | 'translate' | 'rotate' | 'resetTransform' | 'strokeStyle' | 'strokeRect'
+  'drawImage' | 'translate' | 'rotate' | 'resetTransform'
 >;
 
 const transform = (

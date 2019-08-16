@@ -33,8 +33,8 @@ describe('spriteRenderSystem', () => {
 
     expect(context.drawImage).toHaveBeenCalledWith(
       'pretend-bitmap-image',
-      10,
-      15,
+      -16, // Because CanvasRenderingContext2D.translate moves entire canvas to component position
+      -16,
       32,
       32,
     );
@@ -75,8 +75,8 @@ describe('spriteRenderSystem', () => {
 
     expect(context.drawImage).toHaveBeenCalledWith(
       'pretend-bitmap-image',
-      10,
-      15,
+      -16,
+      -16,
       32,
       32,
     );
