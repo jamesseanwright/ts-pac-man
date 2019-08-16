@@ -28,8 +28,8 @@ export const createSpriteRenderSystem = (
     throw new Error(`Sprite ${component.spriteName} not found!`);
   }
 
-  const [x, y] = component.positionable.pos;
-  const { width, height } = component.positionable;
+  const [x, y] = component.tilePositionable.pos;
+  const { width, height } = component.tilePositionable;
   const projectedPoints = project(x, y, width, height);
   const [, , projectedWidth, projectedHeight] = projectedPoints;
 

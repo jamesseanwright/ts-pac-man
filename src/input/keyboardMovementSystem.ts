@@ -1,7 +1,7 @@
 import { Keyboard } from './keyboard';
-import { Positionable } from '../tilePositionable';
+import { TilePositionable } from '../tilePositionable';
 
 export const createKeyboardMovementSystem = (keyboard: Keyboard) =>
-  (component: Positionable) => {
-    if (keyb)
+  (component: TilePositionable) => {
+    // if (keyb)
   };

@@ -1,19 +1,19 @@
-import { Positionable } from '../tilePositionable';
+import { TilePositionable } from '../tilePositionable';
 import createRotatable, { Rotatable } from '../rotatable';
 
 export interface SpriteRenderable {
   spriteName: string;
-  positionable: Positionable;
+  tilePositionable: TilePositionable;
   rotatable: Rotatable;
 }
 
 const createSpriteRenderable = (
   spriteName: string,
-  positionable: Positionable,
+  tilePositionable: TilePositionable,
   rotatable = createRotatable(0),
 ): SpriteRenderable => ({
   spriteName,
-  positionable,
+  tilePositionable,
   rotatable,
 });
 
