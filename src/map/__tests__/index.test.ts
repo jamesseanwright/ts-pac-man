@@ -1,12 +1,12 @@
 import { createMapBinder, Tile, isWalkable } from '../index';
 import createSpriteRenderable from '../../rendering/spriteRenderable';
-import createPositionable from '../../tilePositionable';
+import createTilePositionable from '../../tilePositionable';
 import createRotatable from '../../rotatable';
 
 const createComponent = (spriteName: string, rotation: number, column: number, row: number) =>
   createSpriteRenderable(
     spriteName,
-    createPositionable(column, row, 1, 1),
+    createTilePositionable(column, row, 1, 1),
     createRotatable(rotation),
   );
 

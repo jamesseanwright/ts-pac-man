@@ -1,5 +1,5 @@
 import { createSpriteRenderSystem, Context } from '../spriteRenderSystem';
-import createPositionable from '../../tilePositionable';
+import createTilePositionable from '../../tilePositionable';
 import createSpriteRenderable from '../spriteRenderable';
 import createRotatable from '../../rotatable';
 
@@ -12,7 +12,7 @@ const createContext = (): Context => ({
 
 describe('spriteRenderSystem', () => {
   const project = (...args: [number, number, number, number]) => args;
-  const positionable = createPositionable(10, 15, 32, 32);
+  const positionable = createTilePositionable(10, 15, 32, 32);
 
   const spriteSheet = new Map<string, ImageBitmap>([
     ['some-sprite', ('pretend-bitmap-image' as unknown) as ImageBitmap],
