@@ -1,4 +1,8 @@
-const createKeyboard = (eventTarget: Window, supportedKeys: string[]) => {
+export interface Keyboard {
+  isKeyPressed(key: string): boolean;
+}
+
+const createKeyboard = (eventTarget: Window, supportedKeys: string[]): Keyboard => {
   const keys = new Map<string, boolean>(supportedKeys.map(key => [key, false]));
 
   const updateKey = (key: string, isPressed: boolean) => {

@@ -1,8 +1,7 @@
 import createSystem from '../system';
-import project2D, { Project2D, Points2D } from './camera';
+import { Project2D, Points2D } from './camera';
 import { SpriteRenderable } from './spriteRenderable';
 import { Rotatable } from '../rotatable';
-import { Positionable } from '../positionable';
 
 export type Context = Pick<
   CanvasRenderingContext2D,

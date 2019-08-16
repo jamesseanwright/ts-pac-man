@@ -1,4 +1,4 @@
-import createPositionable from '../positionable';
+import createPositionable from '../tilePositionable';
 import createSpriteRenderable, {
   SpriteRenderable,
 } from '../rendering/spriteRenderable';

@@ -1,5 +1,5 @@
 import { createSpriteRenderSystem, Context } from '../spriteRenderSystem';
-import createPositionable from '../../positionable';
+import createPositionable from '../../tilePositionable';
 import createSpriteRenderable from '../spriteRenderable';
 import createRotatable from '../../rotatable';
 

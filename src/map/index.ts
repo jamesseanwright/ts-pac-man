@@ -1,15 +1,9 @@
 import createSpriteRenderable, {
   SpriteRenderable,
 } from '../rendering/spriteRenderable';
-import createPositionable from '../positionable';
+import createTilePositionable from '../tilePositionable';
 import createRotatable from '../rotatable';
-
-/* 4x4px is the most atomic tile size.
- *
- * TODO: Use aspect ratio instead of
- * separate widths and heights. */
-const TILE_WIDTH = 0.0177;
-const TILE_HEIGHT = 0.0161;
+import { System } from '../system';
 
 /* Numbers next to tile type represent rotation
  * by increments of 1.57 rad/90 deg
@@ -25,7 +19,7 @@ type SquareCorner = 'F0' | 'F1' | 'F2' | 'F3';
 type Gate = 'H';
 type Walkable = 'O';
 
-type Tile =
+export type Tile =
   | OuterCorner
   | InnerCorner
   | StraightWall
@@ -82,41 +76,42 @@ const tiles: Tile[][] = [
 ];
 
 // TODO: corners probably need to be walkable...
-const isWalkable = (tile: Tile): tile is Walkable => tile === 'O';
+export const isWalkable = (tile: Tile): tile is Walkable => tile === 'O';
 
-const toRadians = (rawRotation: string) => {
+export const toRadians = (rawRotation: string) => {
   const rotation = parseInt(rawRotation, 10);
   return rotation * 1.57;
 };
 
 // TODO: Should this live under entities?
-// TODO: Test with injectable map!
-const bindMap = (spriteRenderSystem: System<SpriteRenderable>) => {
-  tiles.forEach((rowTiles, row) => {
-    rowTiles.forEach((tile, column) => {
-      if (isWalkable(tile)) {
-        return;
-      }
+export const createMapBinder = (map: Tile[][]) =>
+  (spriteRenderSystem: Pick<System<SpriteRenderable>, 'register'>) => {
+    map.forEach((rowTiles, row) => {
+      rowTiles.forEach((tile, column) => {
+        if (isWalkable(tile)) {
+          return;
+        }
 
-      const [type, rotation = '0'] = tile;
+        const [type, rotation = '0'] = tile;
 
-      const positionable = createPositionable(
-        column * TILE_WIDTH,
-        row * TILE_HEIGHT,
-        TILE_WIDTH,
-        TILE_HEIGHT,
-      );
+        const positionable = createTilePositionable(
+          column,
+          row,
+          1,
+          1,
+        );
 
-      const rotatable = createRotatable(toRadians(rotation));
-      const spriteRenderable = createSpriteRenderable(
-        type,
-        positionable,
-        rotatable,
-      );
+        const rotatable = createRotatable(toRadians(rotation));
 
-      spriteRenderSystem.register(spriteRenderable);
+        const spriteRenderable = createSpriteRenderable(
+          type,
+          positionable,
+          rotatable,
+        );
+
+        spriteRenderSystem.register(spriteRenderable);
+      });
     });
-  });
-};
+  };
 
-export default bindMap;
+export default createMapBinder(tiles);

@@ -1,4 +1,4 @@
-import { Positionable } from '../positionable';
+import { Positionable } from '../tilePositionable';
 import createRotatable, { Rotatable } from '../rotatable';
 
 export interface SpriteRenderable {
