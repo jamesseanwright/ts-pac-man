@@ -1,4 +1,4 @@
-import { createMapBinder, Tile, isWalkable } from '../map';
+import { createMapBinder, Tile, createCanMoveToTile, isWalkable } from '../map';
 import createSpriteRenderable from '../rendering/spriteRenderable';
 import createTilePositionable from '../tilePositionable';
 import createRotatable from '../rotatable';
@@ -10,37 +10,57 @@ const createComponent = (spriteName: string, rotation: number, column: number, r
     createRotatable(rotation),
   );
 
-describe('map binder', () => {
-  it('should create components for each non-walkable map tile', () => {
-    /* TODO: return entity from
-     * binder to avoid stubs? */
-    const spriteRenderSystem = {
-      register: jest.fn(),
-    };
+describe('map', () => {
+  describe('map binder', () => {
+    it('should create components for each non-walkable map tile', () => {
+      /* TODO: return entity from
+      * binder to avoid stubs? */
+      const spriteRenderSystem = {
+        register: jest.fn(),
+      };
 
+      const map: Tile[][] = [
+        ['A0', 'C0', 'A1'],
+        ['C1', 'O', 'C1'],
+        ['A3', 'C0', 'A2'],
+      ];
+
+      const expectedCalls = [
+        createComponent('A', 0, 0, 0),
+        createComponent('C', 0, 1, 0),
+        createComponent('A', 1.57, 2, 0),
+        createComponent('C', 1.57, 0, 1),
+        createComponent('C', 1.57, 2, 1),
+        createComponent('A', 4.71, 0, 2),
+        createComponent('C', 0, 1, 2),
+        createComponent('A', 3.14, 2, 2),
+      ];
+
+      const bindMap = createMapBinder(map);
+
+      bindMap(spriteRenderSystem);
+
+      spriteRenderSystem.register.mock.calls.forEach(([component], i) => {
+        expect(component).toEqual(expectedCalls[i]);
+      });
+    });
+  });
+
+  describe('canMoveToTile', () => {
     const map: Tile[][] = [
-      ['A0', 'C0', 'A1'],
-      ['C1', 'O', 'C1'],
-      ['A3', 'C0', 'A2'],
+      ['A0', 'C0', 'C0', 'A1'],
+      ['C1', 'O', 'O', 'C1'],
+      ['A3', 'C0', 'C0', 'A2'],
     ];
 
-    const expectedCalls = [
-      createComponent('A', 0, 0, 0),
-      createComponent('C', 0, 1, 0),
-      createComponent('A', 1.57, 2, 0),
-      createComponent('C', 1.57, 0, 1),
-      createComponent('C', 1.57, 2, 1),
-      createComponent('A', 4.71, 0, 2),
-      createComponent('C', 0, 1, 2),
-      createComponent('A', 3.14, 2, 2),
-    ];
+    const canMoveToTile = createCanMoveToTile(map);
 
-    const bindMap = createMapBinder(map);
+    it('should return true if the specified position is walkable', () => {
+      expect(canMoveToTile(1, 1)).toBe(true);
+    });
 
-    bindMap(spriteRenderSystem);
-
-    spriteRenderSystem.register.mock.calls.forEach(([component], i) => {
-      expect(component).toEqual(expectedCalls[i]);
+    it('should return false if the specified position is not walkable', () => {
+      expect(canMoveToTile(1, 0)).toBe(false);
     });
   });
 });

@@ -1,7 +1,7 @@
 import createSpriteRenderable, {
   SpriteRenderable,
 } from './rendering/spriteRenderable';
-import createTilePositionable from './tilePositionable';
+import createTilePositionable, { TilePositionable } from './tilePositionable';
 import createRotatable from './rotatable';
 import { System } from './system';
 
@@ -76,6 +76,7 @@ const tiles: Tile[][] = [
 ];
 
 // TODO: corners probably need to be walkable...
+// TODO: do we need to export this?
 export const isWalkable = (tile: Tile): tile is Walkable => tile === 'O';
 
 export const toRadians = (rawRotation: string) => {
@@ -113,5 +114,11 @@ export const createMapBinder = (map: Tile[][]) =>
       });
     });
   };
+
+export const createCanMoveToTile = (map: Tile[][]) =>
+  (targetColumn: number, targetRow: number) =>
+    isWalkable(map[targetRow][targetColumn]);
+
+export const canMoveToTile = createCanMoveToTile(tiles);
 
 export default createMapBinder(tiles);
