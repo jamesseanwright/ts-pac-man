@@ -3,7 +3,12 @@ import createSpriteRenderable from '../rendering/spriteRenderable';
 import createTilePositionable from '../tilePositionable';
 import createRotatable from '../rotatable';
 
-const createComponent = (spriteName: string, rotation: number, column: number, row: number) =>
+const createComponent = (
+  spriteName: string,
+  rotation: number,
+  column: number,
+  row: number,
+) =>
   createSpriteRenderable(
     spriteName,
     createTilePositionable(column, row, 1, 1),
@@ -14,7 +19,7 @@ describe('map', () => {
   describe('map binder', () => {
     it('should create components for each non-walkable map tile', () => {
       /* TODO: return entity from
-      * binder to avoid stubs? */
+       * binder to avoid stubs? */
       const spriteRenderSystem = {
         register: jest.fn(),
       };

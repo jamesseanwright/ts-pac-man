@@ -59,7 +59,12 @@ context.imageSmoothingEnabled = false;
     project2D,
   );
 
-  const keyboard = createKeyboard(window, ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']);
+  const keyboard = createKeyboard(window, [
+    'ArrowLeft',
+    'ArrowRight',
+    'ArrowUp',
+    'ArrowDown',
+  ]);
 
   const playerMovementSystem = createPlayerMovementSystem(keyboard);
 

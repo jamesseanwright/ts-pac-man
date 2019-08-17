@@ -1,4 +1,4 @@
-import { TILE_WIDTH, TILE_HEIGHT } from "../tilePositionable";
+import { TILE_WIDTH, TILE_HEIGHT } from '../tilePositionable';
 
 /* TODO: make this nomenclature
  * reference tile sizes somehow */

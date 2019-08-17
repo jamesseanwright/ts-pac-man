@@ -35,7 +35,13 @@ export const createSpriteRenderSystem = (
 
   transform(context, projectedPoints, component.rotatable);
 
-  context.drawImage(sprite, -projectedWidth / 2, -projectedHeight / 2, projectedWidth, projectedHeight);
+  context.drawImage(
+    sprite,
+    -projectedWidth / 2,
+    -projectedHeight / 2,
+    projectedWidth,
+    projectedHeight,
+  );
   context.resetTransform();
 };
 

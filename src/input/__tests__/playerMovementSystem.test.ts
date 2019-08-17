@@ -10,7 +10,10 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 1, 1, 1);
     const keyboard = createKeyboard('ArrowLeft');
     const canMoveTo = () => true;
-    const playerMovementSystem = createPlayerMovementSystem(keyboard, canMoveTo);
+    const playerMovementSystem = createPlayerMovementSystem(
+      keyboard,
+      canMoveTo,
+    );
 
     playerMovementSystem(tilePositionable);
 
@@ -21,7 +24,10 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 1, 1, 1);
     const keyboard = createKeyboard('ArrowLeft');
     const canMoveTo = () => false;
-    const playerMovementSystem = createPlayerMovementSystem(keyboard, canMoveTo);
+    const playerMovementSystem = createPlayerMovementSystem(
+      keyboard,
+      canMoveTo,
+    );
 
     playerMovementSystem(tilePositionable);
 
@@ -32,7 +38,10 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 1, 1, 1);
     const keyboard = createKeyboard('ArrowRight');
     const canMoveTo = () => true;
-    const playerMovementSystem = createPlayerMovementSystem(keyboard, canMoveTo);
+    const playerMovementSystem = createPlayerMovementSystem(
+      keyboard,
+      canMoveTo,
+    );
 
     playerMovementSystem(tilePositionable);
 
@@ -43,7 +52,10 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 1, 1, 1);
     const keyboard = createKeyboard('ArrowRight');
     const canMoveTo = () => false;
-    const playerMovementSystem = createPlayerMovementSystem(keyboard, canMoveTo);
+    const playerMovementSystem = createPlayerMovementSystem(
+      keyboard,
+      canMoveTo,
+    );
 
     playerMovementSystem(tilePositionable);
 
@@ -54,7 +66,10 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 2, 1, 1);
     const keyboard = createKeyboard('ArrowUp');
     const canMoveTo = () => true;
-    const playerMovementSystem = createPlayerMovementSystem(keyboard, canMoveTo);
+    const playerMovementSystem = createPlayerMovementSystem(
+      keyboard,
+      canMoveTo,
+    );
 
     playerMovementSystem(tilePositionable);
 
@@ -65,7 +80,10 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 2, 1, 1);
     const keyboard = createKeyboard('ArrowUp');
     const canMoveTo = () => false;
-    const playerMovementSystem = createPlayerMovementSystem(keyboard, canMoveTo);
+    const playerMovementSystem = createPlayerMovementSystem(
+      keyboard,
+      canMoveTo,
+    );
 
     playerMovementSystem(tilePositionable);
 
@@ -76,7 +94,10 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 2, 1, 1);
     const keyboard = createKeyboard('ArrowDown');
     const canMoveTo = () => true;
-    const playerMovementSystem = createPlayerMovementSystem(keyboard, canMoveTo);
+    const playerMovementSystem = createPlayerMovementSystem(
+      keyboard,
+      canMoveTo,
+    );
 
     playerMovementSystem(tilePositionable);
 
@@ -87,7 +108,10 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 2, 1, 1);
     const keyboard = createKeyboard('ArrowDown');
     const canMoveTo = () => false;
-    const playerMovementSystem = createPlayerMovementSystem(keyboard, canMoveTo);
+    const playerMovementSystem = createPlayerMovementSystem(
+      keyboard,
+      canMoveTo,
+    );
 
     playerMovementSystem(tilePositionable);
 
