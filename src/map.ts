@@ -111,9 +111,19 @@ export const createMapBinder = (map: Tile[][]) => (
 };
 
 export const createCanMoveToTile = (map: Tile[][]) => (
-  targetColumn: number,
-  targetRow: number,
-) => isWalkable(map[targetRow][targetColumn]);
+  currentPositionable: TilePositionable,
+  column: number,
+  row: number,
+) => {
+  const { width, height, pos } = currentPositionable;
+  const [currentColumn, currentRow] = pos;
+  const columnOffset = column > currentColumn ? width - 1 : 0;
+  const rowOffset = row > currentRow ? height - 1 : 0;
+  const targetColumn = column + columnOffset;
+  const targetRow = row + rowOffset;
+
+  return isWalkable(map[targetRow][targetColumn]);
+};
 
 export const canMoveToTile = createCanMoveToTile(tiles);
 
