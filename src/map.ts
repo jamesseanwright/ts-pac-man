@@ -32,6 +32,7 @@ export type Tile =
 // TODO: resolve implicit any in return
 const fill = (length: number, tile: Tile | Tile[]) => Array(length).fill(tile);
 
+// TODO: restore original formatting with prettier-ignore
 const tiles: Tile[][] = [
   ['A0', ...fill(25, 'C0'), ...fill(4, 'D0'), ...fill(25, 'C0'), 'A1'],
   ['C1', ...fill(25, 'O'), 'B1', ...fill(2, 'O'), 'B0', ...fill(25, 'O'), 'C1'],

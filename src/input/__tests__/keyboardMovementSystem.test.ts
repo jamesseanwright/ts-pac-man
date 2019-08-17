@@ -3,7 +3,7 @@ import createTilePositionable from '../../tilePositionable';
 
 describe('keyboardMovementSystem', () => {
   const createKeyboard = (expectedKey: string) => ({
-    isKeyPressed: (key: string) => key === expectedKey,
+    getLastPressedKey: () => expectedKey,
   });
 
   it('should move the player to the column left of its current position when the left arrow is pressed and can move', () => {
