@@ -1,9 +1,9 @@
 import createSpriteRenderable, {
   SpriteRenderable,
-} from '../rendering/spriteRenderable';
-import createTilePositionable from '../tilePositionable';
-import createRotatable from '../rotatable';
-import { System } from '../system';
+} from './rendering/spriteRenderable';
+import createTilePositionable from './tilePositionable';
+import createRotatable from './rotatable';
+import { System } from './system';
 
 /* Numbers next to tile type represent rotation
  * by increments of 1.57 rad/90 deg
