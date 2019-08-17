@@ -652,9 +652,7 @@ export const createMapBinder = (map: Tile[][]) => (
       }
 
       const [type, rotation = '0'] = tile;
-
       const positionable = createTilePositionable(column, row, 1, 1);
-
       const rotatable = createRotatable(toRadians(rotation));
 
       const spriteRenderable = createSpriteRenderable(

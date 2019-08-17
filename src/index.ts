@@ -1,6 +1,6 @@
 import createSpriteSheet, { SpriteDefinition } from './spriteSheet';
 import createSpriteRenderSystem from './rendering/spriteRenderSystem';
-import createPlayerMovementSystem from './input/playerMovementSystem';
+import createPlayerMovementSystem from './input/keyboardMovementSystem';
 import createKeyboard from './input/keyboard';
 import bindPacman from './entities/pacman';
 import bindBlinky from './entities/blinky';

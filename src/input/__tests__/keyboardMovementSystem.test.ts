@@ -1,7 +1,7 @@
-import { createPlayerMovementSystem } from '../playerMovementSystem';
+import { createKeyboardMovementSystem } from '../keyboardMovementSystem';
 import createTilePositionable from '../../tilePositionable';
 
-describe('playerMovementSystem', () => {
+describe('keyboardMovementSystem', () => {
   const createKeyboard = (expectedKey: string) => ({
     isKeyPressed: (key: string) => key === expectedKey,
   });
@@ -10,12 +10,13 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 1, 1, 1);
     const keyboard = createKeyboard('ArrowLeft');
     const canMoveTo = () => true;
-    const playerMovementSystem = createPlayerMovementSystem(
+
+    const keyboardMovementSystem = createKeyboardMovementSystem(
       keyboard,
       canMoveTo,
     );
 
-    playerMovementSystem(tilePositionable);
+    keyboardMovementSystem(tilePositionable);
 
     expect(tilePositionable.pos).toEqual([1, 1]);
   });
@@ -24,12 +25,13 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 1, 1, 1);
     const keyboard = createKeyboard('ArrowLeft');
     const canMoveTo = () => false;
-    const playerMovementSystem = createPlayerMovementSystem(
+
+    const keyboardMovementSystem = createKeyboardMovementSystem(
       keyboard,
       canMoveTo,
     );
 
-    playerMovementSystem(tilePositionable);
+    keyboardMovementSystem(tilePositionable);
 
     expect(tilePositionable.pos).toEqual([2, 1]);
   });
@@ -38,12 +40,13 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 1, 1, 1);
     const keyboard = createKeyboard('ArrowRight');
     const canMoveTo = () => true;
-    const playerMovementSystem = createPlayerMovementSystem(
+
+    const keyboardMovementSystem = createKeyboardMovementSystem(
       keyboard,
       canMoveTo,
     );
 
-    playerMovementSystem(tilePositionable);
+    keyboardMovementSystem(tilePositionable);
 
     expect(tilePositionable.pos).toEqual([3, 1]);
   });
@@ -52,12 +55,13 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 1, 1, 1);
     const keyboard = createKeyboard('ArrowRight');
     const canMoveTo = () => false;
-    const playerMovementSystem = createPlayerMovementSystem(
+
+    const keyboardMovementSystem = createKeyboardMovementSystem(
       keyboard,
       canMoveTo,
     );
 
-    playerMovementSystem(tilePositionable);
+    keyboardMovementSystem(tilePositionable);
 
     expect(tilePositionable.pos).toEqual([2, 1]);
   });
@@ -66,12 +70,13 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 2, 1, 1);
     const keyboard = createKeyboard('ArrowUp');
     const canMoveTo = () => true;
-    const playerMovementSystem = createPlayerMovementSystem(
+
+    const keyboardMovementSystem = createKeyboardMovementSystem(
       keyboard,
       canMoveTo,
     );
 
-    playerMovementSystem(tilePositionable);
+    keyboardMovementSystem(tilePositionable);
 
     expect(tilePositionable.pos).toEqual([2, 1]);
   });
@@ -80,12 +85,13 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 2, 1, 1);
     const keyboard = createKeyboard('ArrowUp');
     const canMoveTo = () => false;
-    const playerMovementSystem = createPlayerMovementSystem(
+
+    const keyboardMovementSystem = createKeyboardMovementSystem(
       keyboard,
       canMoveTo,
     );
 
-    playerMovementSystem(tilePositionable);
+    keyboardMovementSystem(tilePositionable);
 
     expect(tilePositionable.pos).toEqual([2, 2]);
   });
@@ -94,12 +100,13 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 2, 1, 1);
     const keyboard = createKeyboard('ArrowDown');
     const canMoveTo = () => true;
-    const playerMovementSystem = createPlayerMovementSystem(
+
+    const keyboardMovementSystem = createKeyboardMovementSystem(
       keyboard,
       canMoveTo,
     );
 
-    playerMovementSystem(tilePositionable);
+    keyboardMovementSystem(tilePositionable);
 
     expect(tilePositionable.pos).toEqual([2, 3]);
   });
@@ -108,12 +115,13 @@ describe('playerMovementSystem', () => {
     const tilePositionable = createTilePositionable(2, 2, 1, 1);
     const keyboard = createKeyboard('ArrowDown');
     const canMoveTo = () => false;
-    const playerMovementSystem = createPlayerMovementSystem(
+
+    const keyboardMovementSystem = createKeyboardMovementSystem(
       keyboard,
       canMoveTo,
     );
 
-    playerMovementSystem(tilePositionable);
+    keyboardMovementSystem(tilePositionable);
 
     expect(tilePositionable.pos).toEqual([2, 2]);
   });

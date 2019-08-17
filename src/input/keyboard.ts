@@ -1,16 +1,16 @@
 export interface Keyboard {
-  isKeyPressed(key: string): boolean;
+  getLastPressedKey(): string;
 }
 
 const createKeyboard = (
   eventTarget: Window,
   supportedKeys: string[],
 ): Keyboard => {
-  const keys = new Map<string, boolean>(supportedKeys.map(key => [key, false]));
+  let lastPressedKey = '';
 
   const updateKey = (key: string, isPressed: boolean) => {
-    if (keys.has(key)) {
-      keys.set(key, isPressed);
+    if (supportedKeys.includes(key) && key !== lastPressedKey) {
+      lastPressedKey = key;
     }
   };
 
@@ -18,8 +18,8 @@ const createKeyboard = (
   eventTarget.addEventListener('keyup', ({ key }) => updateKey(key, false));
 
   return {
-    isKeyPressed(key: string) {
-      return Boolean(keys.get(key));
+    getLastPressedKey() {
+      return lastPressedKey;
     },
   };
 };
