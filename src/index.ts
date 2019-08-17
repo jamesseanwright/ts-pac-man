@@ -1,11 +1,12 @@
 import createSpriteSheet, { SpriteDefinition } from './spriteSheet';
 import createSpriteRenderSystem from './rendering/spriteRenderSystem';
+import createPlayerMovementSystem from './input/playerMovementSystem';
+import createKeyboard from './input/keyboard';
 import bindPacman from './entities/pacman';
 import bindBlinky from './entities/blinky';
 import createProject2D from './rendering/camera';
 import bindMap from './map';
 
-const sprites = document.body.querySelector<HTMLImageElement>('#spriteSheet');
 const canvas = document.body.querySelector<HTMLCanvasElement>('#game');
 
 if (!canvas) {
@@ -40,7 +41,7 @@ context.imageSmoothingEnabled = false;
 
   // TODO: trim sprite sheet to keep only necessary sprites
   const spriteSheet = await createSpriteSheet(sprites, [
-    // ['pac-man', [473, 0, 12, 14]],
+    ['pac-man', [473, 0, 12, 14]],
     // ['blinky', [457, 65, 14, 14]],
 
     // Map tiles keyed by type
@@ -58,12 +59,17 @@ context.imageSmoothingEnabled = false;
     project2D,
   );
 
+  const keyboard = createKeyboard(window, ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown']);
+
+  const playerMovementSystem = createPlayerMovementSystem(keyboard);
+
   bindMap(spriteRenderSystem);
-  // bindPacman(spriteRenderSystem);
+  bindPacman(spriteRenderSystem, playerMovementSystem);
   // bindBlinky(spriteRenderSystem);
 
   const loop = (time: number) => {
     spriteRenderSystem.update(time);
+    playerMovementSystem.update(time);
     requestAnimationFrame(loop);
   };
 

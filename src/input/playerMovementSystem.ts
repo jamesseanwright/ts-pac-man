@@ -3,6 +3,7 @@
 import { Keyboard } from './keyboard';
 import { TilePositionable } from '../tilePositionable';
 import { canMoveToTile } from '../map';
+import createSystem from '../system';
 
 export const createPlayerMovementSystem = (keyboard: Keyboard, canMoveTo: typeof canMoveToTile) =>
   (component: TilePositionable) => {
@@ -29,3 +30,10 @@ export const createPlayerMovementSystem = (keyboard: Keyboard, canMoveTo: typeof
       component.pos[1] = nextRow;
     }
   };
+
+/* Pass in keyboard as external dependency so
+ * we can control when events are registered */
+export default (keyboard: Keyboard) =>
+  createSystem<TilePositionable>(
+    createPlayerMovementSystem(keyboard, canMoveToTile),
+  );
