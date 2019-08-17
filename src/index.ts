@@ -68,8 +68,11 @@ context.imageSmoothingEnabled = false;
   // bindBlinky(spriteRenderSystem);
 
   const loop = (time: number) => {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
     spriteRenderSystem.update(time);
     playerMovementSystem.update(time);
+
     requestAnimationFrame(loop);
   };
 
