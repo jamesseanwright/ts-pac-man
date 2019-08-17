@@ -4,7 +4,10 @@
 import { SpeedRotatable } from './speedRotatable';
 import createSystem from './system';
 
-export const speedRotationSystem = ({ moveable, rotatable }: SpeedRotatable) => {
+export const speedRotationSystem = ({
+  moveable,
+  rotatable,
+}: SpeedRotatable) => {
   rotatable.angle = Math.atan2(moveable.speed[1], moveable.speed[0]);
 };
 

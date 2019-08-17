@@ -63,12 +63,12 @@ describe('map', () => {
     const canMoveToTile = createCanMoveToTile(map);
 
     it('should return true if the specified position is walkable', () => {
-      const tilePositionable = createTilePositionable(2, 2, 1, 1)
+      const tilePositionable = createTilePositionable(2, 2, 1, 1);
       expect(canMoveToTile(tilePositionable, 1, 1)).toBe(true);
     });
 
     it('should return false if the specified position is not walkable', () => {
-      const tilePositionable = createTilePositionable(2, 2, 1, 1)
+      const tilePositionable = createTilePositionable(2, 2, 1, 1);
       expect(canMoveToTile(tilePositionable, 1, 0)).toBe(false);
     });
 

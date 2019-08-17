@@ -71,11 +71,7 @@ context.imageSmoothingEnabled = false;
 
   bindMap(spriteRenderSystem);
 
-  bindPacman(
-    spriteRenderSystem,
-    playerMovementSystem,
-    speedRotationSystem,
-  );
+  bindPacman(spriteRenderSystem, playerMovementSystem, speedRotationSystem);
   // bindBlinky(spriteRenderSystem);
 
   const loop = (time: number) => {

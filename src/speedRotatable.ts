@@ -8,7 +8,10 @@ export interface SpeedRotatable {
   rotatable: Rotatable;
 }
 
-const createSpeedRotatable = (moveable: Moveable, rotatable: Rotatable): SpeedRotatable => ({
+const createSpeedRotatable = (
+  moveable: Moveable,
+  rotatable: Rotatable,
+): SpeedRotatable => ({
   moveable,
   rotatable,
 });
