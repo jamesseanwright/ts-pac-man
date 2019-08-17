@@ -33,7 +33,7 @@ export const createKeyboardMovementSystem = (
   const [column, row] = component.tilePositionable.pos;
   const [xSpeed, ySpeed] = getSpeed(keyboard, component.moveable);
 
-  if (canMoveTo(column + xSpeed, row + ySpeed)) {
+  if (canMoveTo(component.tilePositionable, column + xSpeed, row + ySpeed)) {
     /* Mutating to avoid GC-related jank
      * TODO: cover this in presentation */
     component.moveable.speed[0] = xSpeed;
