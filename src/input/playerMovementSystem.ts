@@ -12,6 +12,14 @@ export const createPlayerMovementSystem = (keyboard: Keyboard, canMoveTo: typeof
 
     if (keyboard.isKeyPressed('ArrowLeft')) {
       nextColumn = column - 1;
+    } else if (keyboard.isKeyPressed('ArrowRight')) {
+      nextColumn = column + 1;
+    }
+
+    if (keyboard.isKeyPressed('ArrowUp')) {
+      nextRow = row - 1;
+    } else if (keyboard.isKeyPressed('ArrowDown')) {
+      nextRow = row + 1;
     }
 
     if (canMoveTo(nextColumn, nextRow)) {

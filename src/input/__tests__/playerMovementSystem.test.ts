@@ -49,4 +49,48 @@ describe('playerMovementSystem', () => {
 
     expect(tilePositionable.pos).toEqual([2, 1]);
   });
+
+  it('should move the player to the row above when the up arrow is pressed and can move', () => {
+    const tilePositionable = createTilePositionable(2, 2, 1, 1);
+    const keyboard = createKeyboard('ArrowUp');
+    const canMoveTo = () => true;
+    const playerMovementSystem = createPlayerMovementSystem(keyboard, canMoveTo);
+
+    playerMovementSystem(tilePositionable);
+
+    expect(tilePositionable.pos).toEqual([2, 1]);
+  });
+
+  it('should not move the player to the row above when the up arrow is pressed and cannot move', () => {
+    const tilePositionable = createTilePositionable(2, 2, 1, 1);
+    const keyboard = createKeyboard('ArrowUp');
+    const canMoveTo = () => false;
+    const playerMovementSystem = createPlayerMovementSystem(keyboard, canMoveTo);
+
+    playerMovementSystem(tilePositionable);
+
+    expect(tilePositionable.pos).toEqual([2, 2]);
+  });
+
+  it('should move the player to the row below when the down arrow is pressed and can move', () => {
+    const tilePositionable = createTilePositionable(2, 2, 1, 1);
+    const keyboard = createKeyboard('ArrowDown');
+    const canMoveTo = () => true;
+    const playerMovementSystem = createPlayerMovementSystem(keyboard, canMoveTo);
+
+    playerMovementSystem(tilePositionable);
+
+    expect(tilePositionable.pos).toEqual([2, 3]);
+  });
+
+  it('should not move the player to the row below when the down arrow is pressed and cannot move', () => {
+    const tilePositionable = createTilePositionable(2, 2, 1, 1);
+    const keyboard = createKeyboard('ArrowDown');
+    const canMoveTo = () => false;
+    const playerMovementSystem = createPlayerMovementSystem(keyboard, canMoveTo);
+
+    playerMovementSystem(tilePositionable);
+
+    expect(tilePositionable.pos).toEqual([2, 2]);
+  });
 });
