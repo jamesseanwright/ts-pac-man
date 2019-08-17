@@ -19,7 +19,7 @@ const getSpeed = (keyboard: Keyboard, moveable: Moveable) => {
       return [0, -1];
 
     case 'ArrowDown':
-      return [0, 1]
+      return [0, 1];
 
     default:
       return moveable.speed;

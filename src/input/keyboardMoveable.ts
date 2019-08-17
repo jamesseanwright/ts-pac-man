@@ -6,7 +6,10 @@ export interface KeyboardMoveable {
   moveable: Moveable;
 }
 
-const createKeyboardMoveable = (tilePositionable: TilePositionable, moveable: Moveable): KeyboardMoveable => ({
+const createKeyboardMoveable = (
+  tilePositionable: TilePositionable,
+  moveable: Moveable,
+): KeyboardMoveable => ({
   tilePositionable,
   moveable,
 });

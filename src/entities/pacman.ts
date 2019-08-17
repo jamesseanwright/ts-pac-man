@@ -3,7 +3,9 @@ import createSpriteRenderable, {
   SpriteRenderable,
 } from '../rendering/spriteRenderable';
 import { System } from '../system';
-import createKeyboardMoveable, { KeyboardMoveable } from '../input/keyboardMoveable';
+import createKeyboardMoveable, {
+  KeyboardMoveable,
+} from '../input/keyboardMoveable';
 import createMoveable from '../moveable';
 
 const bindPacman = (
