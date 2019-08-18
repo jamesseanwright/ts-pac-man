@@ -152,4 +152,22 @@ describe('keyboardMovementSystem', () => {
 
     expect(tilePositionable.pos).toEqual([2, 2]);
   });
+
+  it('should only update the offset if the player is still moving between tiles', () => {
+    const tilePositionable = createTilePositionable(2, 1, 1, 1);
+    const moveable = createMoveable(0, 0, 0.5, 0.5);
+    const keyboardMoveable = createKeyboardMoveable(tilePositionable, moveable);
+    const keyboard = createKeyboard('ArrowLeft');
+    const canMoveTo = () => true;
+
+    const keyboardMovementSystem = createKeyboardMovementSystem(
+      keyboard,
+      canMoveTo,
+    );
+
+    keyboardMovementSystem(keyboardMoveable);
+
+    expect(tilePositionable.pos).toEqual([2, 1]);
+    expect(tilePositionable.offset).toEqual([-0.5, 0])
+  });
 });
