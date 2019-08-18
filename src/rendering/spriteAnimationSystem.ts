@@ -6,6 +6,7 @@ export const createSpriteAnimationSystem = () => {
   return (spriteAnimatable: SpriteAnimatable, time: number) => {
     if (time - lastFrameTimeMs > spriteAnimatable.frameRateMs) {
       spriteAnimatable.frame = spriteAnimatable.frame === spriteAnimatable.sequenceLength - 1 ? 0 : spriteAnimatable.frame + 1;
+      spriteAnimatable.spriteRenderable.spriteName = `${spriteAnimatable.spritePrefix}-${spriteAnimatable.frame}`;
       lastFrameTimeMs = time;
     }
   };
