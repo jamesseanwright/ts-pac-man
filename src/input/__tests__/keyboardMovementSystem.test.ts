@@ -10,7 +10,7 @@ describe('keyboardMovementSystem', () => {
 
   it('should move the player to the column left of its current position when the left arrow is pressed and can move', () => {
     const tilePositionable = createTilePositionable(2, 1, 1, 1);
-    const moveable = createMoveable(1, 1);
+    const moveable = createMoveable(0, 0, 1, 1);
     const keyboardMoveable = createKeyboardMoveable(tilePositionable, moveable);
     const keyboard = createKeyboard('ArrowLeft');
     const canMoveTo = () => true;
@@ -20,6 +20,8 @@ describe('keyboardMovementSystem', () => {
       canMoveTo,
     );
 
+    // 3 calls to respect offset before moving to previous column
+    keyboardMovementSystem(keyboardMoveable);
     keyboardMovementSystem(keyboardMoveable);
 
     expect(tilePositionable.pos).toEqual([1, 1]);
@@ -27,7 +29,7 @@ describe('keyboardMovementSystem', () => {
 
   it('should not move the player to the column left of its current position when the left arrow is pressed and cannot move', () => {
     const tilePositionable = createTilePositionable(2, 1, 1, 1);
-    const moveable = createMoveable(1, 1);
+    const moveable = createMoveable(0, 0, 1, 1);
     const keyboardMoveable = createKeyboardMoveable(tilePositionable, moveable);
     const keyboard = createKeyboard('ArrowLeft');
     const canMoveTo = () => false;
@@ -38,13 +40,14 @@ describe('keyboardMovementSystem', () => {
     );
 
     keyboardMovementSystem(keyboardMoveable);
+    keyboardMovementSystem(keyboardMoveable);
 
     expect(tilePositionable.pos).toEqual([2, 1]);
   });
 
   it('should move the player to the column right of its current position when the right arrow is pressed and can move', () => {
     const tilePositionable = createTilePositionable(2, 1, 1, 1);
-    const moveable = createMoveable(1, 1);
+    const moveable = createMoveable(0, 0, 1, 1);
     const keyboardMoveable = createKeyboardMoveable(tilePositionable, moveable);
     const keyboard = createKeyboard('ArrowRight');
     const canMoveTo = () => true;
@@ -54,6 +57,7 @@ describe('keyboardMovementSystem', () => {
       canMoveTo,
     );
 
+    keyboardMovementSystem(keyboardMoveable);
     keyboardMovementSystem(keyboardMoveable);
 
     expect(tilePositionable.pos).toEqual([3, 1]);
@@ -61,7 +65,7 @@ describe('keyboardMovementSystem', () => {
 
   it('should not move the player to the column right of its current position when the right arrow is pressed and cannot move', () => {
     const tilePositionable = createTilePositionable(2, 1, 1, 1);
-    const moveable = createMoveable(1, 1);
+    const moveable = createMoveable(0, 0, 1, 1);
     const keyboardMoveable = createKeyboardMoveable(tilePositionable, moveable);
     const keyboard = createKeyboard('ArrowRight');
     const canMoveTo = () => false;
@@ -72,13 +76,14 @@ describe('keyboardMovementSystem', () => {
     );
 
     keyboardMovementSystem(keyboardMoveable);
+    keyboardMovementSystem(keyboardMoveable);
 
     expect(tilePositionable.pos).toEqual([2, 1]);
   });
 
   it('should move the player to the row above when the up arrow is pressed and can move', () => {
     const tilePositionable = createTilePositionable(2, 2, 1, 1);
-    const moveable = createMoveable(1, 1);
+    const moveable = createMoveable(0, 0, 1, 1);
     const keyboardMoveable = createKeyboardMoveable(tilePositionable, moveable);
     const keyboard = createKeyboard('ArrowUp');
     const canMoveTo = () => true;
@@ -88,6 +93,7 @@ describe('keyboardMovementSystem', () => {
       canMoveTo,
     );
 
+    keyboardMovementSystem(keyboardMoveable);
     keyboardMovementSystem(keyboardMoveable);
 
     expect(tilePositionable.pos).toEqual([2, 1]);
@@ -95,7 +101,7 @@ describe('keyboardMovementSystem', () => {
 
   it('should not move the player to the row above when the up arrow is pressed and cannot move', () => {
     const tilePositionable = createTilePositionable(2, 2, 1, 1);
-    const moveable = createMoveable(1, 1);
+    const moveable = createMoveable(0, 0, 1, 1);
     const keyboardMoveable = createKeyboardMoveable(tilePositionable, moveable);
     const keyboard = createKeyboard('ArrowUp');
     const canMoveTo = () => false;
@@ -106,13 +112,14 @@ describe('keyboardMovementSystem', () => {
     );
 
     keyboardMovementSystem(keyboardMoveable);
+    keyboardMovementSystem(keyboardMoveable);
 
     expect(tilePositionable.pos).toEqual([2, 2]);
   });
 
   it('should move the player to the row below when the down arrow is pressed and can move', () => {
     const tilePositionable = createTilePositionable(2, 2, 1, 1);
-    const moveable = createMoveable(1, 1);
+    const moveable = createMoveable(0, 0, 1, 1);
     const keyboardMoveable = createKeyboardMoveable(tilePositionable, moveable);
     const keyboard = createKeyboard('ArrowDown');
     const canMoveTo = () => true;
@@ -123,13 +130,14 @@ describe('keyboardMovementSystem', () => {
     );
 
     keyboardMovementSystem(keyboardMoveable);
+    keyboardMovementSystem(keyboardMoveable);
 
     expect(tilePositionable.pos).toEqual([2, 3]);
   });
 
   it('should not move the player to the row below when the down arrow is pressed and cannot move', () => {
     const tilePositionable = createTilePositionable(2, 2, 1, 1);
-    const moveable = createMoveable(1, 1);
+    const moveable = createMoveable(0, 0, 1, 1);
     const keyboardMoveable = createKeyboardMoveable(tilePositionable, moveable);
     const keyboard = createKeyboard('ArrowDown');
     const canMoveTo = () => false;
@@ -139,6 +147,7 @@ describe('keyboardMovementSystem', () => {
       canMoveTo,
     );
 
+    keyboardMovementSystem(keyboardMoveable);
     keyboardMovementSystem(keyboardMoveable);
 
     expect(tilePositionable.pos).toEqual([2, 2]);

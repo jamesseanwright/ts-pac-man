@@ -28,8 +28,6 @@ const getDirection = (keyboard: Keyboard, { speed }: Moveable): [number, number]
 };
 
 const move = ({ tilePositionable, moveable }: KeyboardMoveable, direction: [number, number]) => {
-  /* Mutating to avoid GC-related jank
-   * TODO: cover this in presentation */
   direction.forEach((dir, i) => {
     const hasReachedNextTile = tilePositionable.offset[i] !== 0 && tilePositionable.offset[i] % 1 === 0;
 
