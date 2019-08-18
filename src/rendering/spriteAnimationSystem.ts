@@ -1,4 +1,5 @@
 import { SpriteAnimatable } from './spriteAnimatable';
+import createSystem from '../system';
 
 export const createSpriteAnimationSystem = () => {
   let lastFrameTimeMs = 0;
@@ -14,3 +15,5 @@ export const createSpriteAnimationSystem = () => {
     }
   };
 };
+
+export default createSystem<SpriteAnimatable>(createSpriteAnimationSystem());

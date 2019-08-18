@@ -1,5 +1,6 @@
-import createSpriteSheet, { SpriteDefinition } from './spriteSheet';
+import createSpriteSheet from './spriteSheet';
 import createSpriteRenderSystem from './rendering/spriteRenderSystem';
+import spriteAnimationSystem from './rendering/spriteAnimationSystem';
 import createPlayerMovementSystem from './input/keyboardMovementSystem';
 import moveRotationSystem from './moveRotationSystem';
 import createKeyboard from './input/keyboard';
@@ -42,7 +43,8 @@ context.imageSmoothingEnabled = false;
 
   // TODO: trim sprite sheet to keep only necessary sprites
   const spriteSheet = await createSpriteSheet(sprites, [
-    ['pac-man', [473, 0, 12, 14]],
+    ['pac-man-0', [473, 1, 12, 14]],
+    ['pac-man-1', [457, 1, 12, 14]],
     // ['blinky', [457, 65, 14, 14]],
 
     // Map tiles keyed by type
@@ -71,13 +73,14 @@ context.imageSmoothingEnabled = false;
 
   bindMap(spriteRenderSystem);
 
-  bindPacman(spriteRenderSystem, playerMovementSystem, moveRotationSystem);
+  bindPacman(spriteRenderSystem, spriteAnimationSystem, playerMovementSystem, moveRotationSystem);
   // bindBlinky(spriteRenderSystem);
 
   const loop = (time: number) => {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     spriteRenderSystem.update(time);
+    spriteAnimationSystem.update(time);
     playerMovementSystem.update(time);
     moveRotationSystem.update(time);
 
