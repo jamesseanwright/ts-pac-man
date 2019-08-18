@@ -1,5 +1,8 @@
 import createProject2D from '../camera';
-import createTilePositionable, { TILE_WIDTH, TILE_HEIGHT } from '../../tilePositionable';
+import createTilePositionable, {
+  TILE_WIDTH,
+  TILE_HEIGHT,
+} from '../../tilePositionable';
 
 describe('project2D', () => {
   it('should return a fixed-length tuple array of the positionable projected against the viewport', () => {

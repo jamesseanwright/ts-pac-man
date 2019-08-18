@@ -8,7 +8,10 @@ import createSystem from '../system';
 import { KeyboardMoveable } from './keyboardMoveable';
 import { Moveable } from '../moveable';
 
-const getDirection = (keyboard: Keyboard, { speed }: Moveable): [number, number] => {
+const getDirection = (
+  keyboard: Keyboard,
+  { speed }: Moveable,
+): [number, number] => {
   switch (keyboard.getLastPressedKey()) {
     case 'ArrowLeft':
       return [-1, 0];
@@ -27,9 +30,13 @@ const getDirection = (keyboard: Keyboard, { speed }: Moveable): [number, number]
   }
 };
 
-const move = ({ tilePositionable, moveable }: KeyboardMoveable, direction: [number, number]) => {
+const move = (
+  { tilePositionable, moveable }: KeyboardMoveable,
+  direction: [number, number],
+) => {
   direction.forEach((dir, i) => {
-    const hasReachedNextTile = tilePositionable.offset[i] !== 0 && tilePositionable.offset[i] % 1 === 0;
+    const hasReachedNextTile =
+      tilePositionable.offset[i] !== 0 && tilePositionable.offset[i] % 1 === 0;
 
     if (hasReachedNextTile) {
       tilePositionable.pos[i] += dir;
@@ -48,7 +55,13 @@ export const createKeyboardMovementSystem = (
   const [column, row] = component.tilePositionable.pos;
   const direction = getDirection(keyboard, component.moveable);
 
-  if (canMoveTo(component.tilePositionable, column + Math.ceil(direction[0]), row + Math.ceil(direction[1]))) {
+  if (
+    canMoveTo(
+      component.tilePositionable,
+      column + Math.ceil(direction[0]),
+      row + Math.ceil(direction[1]),
+    )
+  ) {
     move(component, direction);
   }
 };

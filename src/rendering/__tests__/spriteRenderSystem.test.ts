@@ -1,5 +1,7 @@
 import { createSpriteRenderSystem, Context } from '../spriteRenderSystem';
-import createTilePositionable, { TilePositionable } from '../../tilePositionable';
+import createTilePositionable, {
+  TilePositionable,
+} from '../../tilePositionable';
 import createSpriteRenderable from '../spriteRenderable';
 import createRotatable from '../../rotatable';
 import { Points2D } from '../camera';
@@ -12,7 +14,11 @@ const createContext = (): Context => ({
 });
 
 describe('spriteRenderSystem', () => {
-  const project = ({ pos: [x, y], width, height }: TilePositionable): Points2D => [x, y, width, height];
+  const project = ({
+    pos: [x, y],
+    width,
+    height,
+  }: TilePositionable): Points2D => [x, y, width, height];
   const positionable = createTilePositionable(10, 15, 32, 32);
 
   const spriteSheet = new Map<string, ImageBitmap>([

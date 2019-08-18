@@ -4,7 +4,12 @@ export interface Moveable {
 }
 
 // TODO: => createTileMoveable
-const createMoveable = (xDir: number, yDir: number, xSpeed: number, ySpeed: number): Moveable => ({
+const createMoveable = (
+  xDir: number,
+  yDir: number,
+  xSpeed: number,
+  ySpeed: number,
+): Moveable => ({
   direction: [xDir, yDir],
   speed: [xSpeed, ySpeed],
 });

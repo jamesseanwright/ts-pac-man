@@ -168,6 +168,6 @@ describe('keyboardMovementSystem', () => {
     keyboardMovementSystem(keyboardMoveable);
 
     expect(tilePositionable.pos).toEqual([2, 1]);
-    expect(tilePositionable.offset).toEqual([-0.5, 0])
+    expect(tilePositionable.offset).toEqual([-0.5, 0]);
   });
 });

@@ -1,4 +1,4 @@
-import { SpriteRenderable } from "./spriteRenderable";
+import { SpriteRenderable } from './spriteRenderable';
 
 export interface SpriteAnimatable {
   spriteRenderable: SpriteRenderable;
@@ -8,7 +8,12 @@ export interface SpriteAnimatable {
   spritePrefix: string;
 }
 
-const createSpriteAnimatable = (spriteRenderable: SpriteRenderable, frameRateMs: number, sequenceLength: number, spritePrefix: string): SpriteAnimatable => ({
+const createSpriteAnimatable = (
+  spriteRenderable: SpriteRenderable,
+  frameRateMs: number,
+  sequenceLength: number,
+  spritePrefix: string,
+): SpriteAnimatable => ({
   spriteRenderable,
   frame: 0,
   frameRateMs,
