@@ -11,6 +11,7 @@ export interface TilePositionable {
    * TODO: better name to incorporate width
    * and height. Width/height in tiles?! */
   pos: [number, number];
+  offset: [number, number]; // World space offset for transitions
   width: number; // Multiple of TILE_WIDTH
   height: number; // Multiple of TILE_HEIGHT
 }
@@ -22,6 +23,7 @@ const createTilePositionable = (
   height: number,
 ): TilePositionable => ({
   pos: [column, row],
+  offset: [0, 0],
   width,
   height,
 });
