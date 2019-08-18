@@ -20,7 +20,7 @@ const bindPacman = (
 ) => {
   const positionable = createTilePositionable(1, 1, 3, 3);
   const rotatable = createRotatable();
-  const moveable = createMoveable(0.25, 0); // TODO: => tileMoveable
+  const moveable = createMoveable(1, 1); // TODO: => tileMoveable
   const spriteRenderable = createSpriteRenderable(
     'pac-man',
     positionable,

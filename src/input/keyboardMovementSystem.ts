@@ -8,22 +8,22 @@ import createSystem from '../system';
 import { KeyboardMoveable } from './keyboardMoveable';
 import { Moveable } from '../moveable';
 
-const getSpeed = (keyboard: Keyboard, moveable: Moveable) => {
+const getDirection = (keyboard: Keyboard, { speed }: Moveable) => {
   switch (keyboard.getLastPressedKey()) {
     case 'ArrowLeft':
-      return [-1, 0];
+      return [speed[0] * -1, 0];
 
     case 'ArrowRight':
-      return [1, 0];
+      return [speed[0] * 1, 0];
 
     case 'ArrowUp':
-      return [0, -1];
+      return [0, speed[1] * -1];
 
     case 'ArrowDown':
-      return [0, 1];
+      return [0, speed[1] * 1];
 
     default:
-      return moveable.speed;
+      return [0, 0]; // TODO
   }
 };
 
@@ -32,21 +32,16 @@ export const createKeyboardMovementSystem = (
   canMoveTo: typeof canMoveToTile,
 ) => (component: KeyboardMoveable) => {
   const [column, row] = component.tilePositionable.pos;
-  const [xSpeed, ySpeed] = getSpeed(keyboard, component.moveable);
+  const direction = getDirection(keyboard, component.moveable);
 
-  if (canMoveTo(component.tilePositionable, column + xSpeed, row + ySpeed)) {
+  if (canMoveTo(component.tilePositionable, column + direction[0], row + direction[1])) {
     /* Mutating to avoid GC-related jank
      * TODO: cover this in presentation */
-    component.moveable.speed[0] = xSpeed;
-    component.moveable.speed[1] = ySpeed;
-  } else {
-    component.moveable.speed[0] = 0;
-    component.moveable.speed[1] = 0;
-  }
 
-  // TODO: split into own system?
-  component.tilePositionable.pos[0] += component.moveable.speed[0];
-  component.tilePositionable.pos[1] += component.moveable.speed[1];
+    direction.forEach((dir, i) => {
+      component.tilePositionable.pos[i] += component.moveable.speed[i] * dir;
+    });
+  }
 };
 
 /* Pass in keyboard as external dependency so
