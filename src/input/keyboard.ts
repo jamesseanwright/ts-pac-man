@@ -8,14 +8,13 @@ const createKeyboard = (
 ): Keyboard => {
   let lastPressedKey = '';
 
-  const updateKey = (key: string, isPressed: boolean) => {
+  const updateKey = (key: string) => {
     if (supportedKeys.includes(key) && key !== lastPressedKey) {
       lastPressedKey = key;
     }
   };
 
-  eventTarget.addEventListener('keydown', ({ key }) => updateKey(key, true));
-  eventTarget.addEventListener('keyup', ({ key }) => updateKey(key, false));
+  eventTarget.addEventListener('keydown', ({ key }) => updateKey(key));
 
   return {
     getLastPressedKey() {

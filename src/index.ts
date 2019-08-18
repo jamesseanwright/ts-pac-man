@@ -1,7 +1,7 @@
 import createSpriteSheet, { SpriteDefinition } from './spriteSheet';
 import createSpriteRenderSystem from './rendering/spriteRenderSystem';
 import createPlayerMovementSystem from './input/keyboardMovementSystem';
-import speedRotationSystem from './speedRotationSystem';
+import moveRotationSystem from './moveRotationSystem';
 import createKeyboard from './input/keyboard';
 import bindPacman from './entities/pacman';
 import bindBlinky from './entities/blinky';
@@ -71,7 +71,7 @@ context.imageSmoothingEnabled = false;
 
   bindMap(spriteRenderSystem);
 
-  bindPacman(spriteRenderSystem, playerMovementSystem, speedRotationSystem);
+  bindPacman(spriteRenderSystem, playerMovementSystem, moveRotationSystem);
   // bindBlinky(spriteRenderSystem);
 
   const loop = (time: number) => {
@@ -79,7 +79,7 @@ context.imageSmoothingEnabled = false;
 
     spriteRenderSystem.update(time);
     playerMovementSystem.update(time);
-    speedRotationSystem.update(time);
+    moveRotationSystem.update(time);
 
     requestAnimationFrame(loop);
   };

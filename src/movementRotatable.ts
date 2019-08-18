@@ -3,17 +3,17 @@ import { Rotatable } from './rotatable';
 /* A component for rotations
  * based upon speed */
 
-export interface SpeedRotatable {
+export interface MovementRotatable {
   moveable: Moveable;
   rotatable: Rotatable;
 }
 
-const createSpeedRotatable = (
+const createMovementRotatable = (
   moveable: Moveable,
   rotatable: Rotatable,
-): SpeedRotatable => ({
+): MovementRotatable => ({
   moveable,
   rotatable,
 });
 
-export default createSpeedRotatable;
+export default createMovementRotatable;

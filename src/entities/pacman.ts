@@ -10,17 +10,17 @@ import createKeyboardMoveable, {
 } from '../input/keyboardMoveable';
 
 import createMoveable from '../moveable';
-import createSpeedRotatable, { SpeedRotatable } from '../speedRotatable';
+import createSpeedRotatable, { MovementRotatable } from '../movementRotatable';
 import createRotatable from '../rotatable';
 
 const bindPacman = (
   spriteRenderSystem: System<SpriteRenderable>,
   playerMovementSystem: System<KeyboardMoveable>,
-  speedRotationSystem: System<SpeedRotatable>,
+  moveRotationSystem: System<MovementRotatable>,
 ) => {
   const positionable = createTilePositionable(1, 1, 3, 3);
   const rotatable = createRotatable();
-  const moveable = createMoveable(1, 1); // TODO: => tileMoveable
+  const moveable = createMoveable(1, 0, 1, 1); // TODO: => tileMoveable
   const spriteRenderable = createSpriteRenderable(
     'pac-man',
     positionable,
@@ -31,7 +31,7 @@ const bindPacman = (
 
   spriteRenderSystem.register(spriteRenderable);
   playerMovementSystem.register(keyboardMoveable);
-  speedRotationSystem.register(speedRotatable);
+  moveRotationSystem.register(speedRotatable);
 };
 
 export default bindPacman;

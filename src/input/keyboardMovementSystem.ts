@@ -40,6 +40,7 @@ export const createKeyboardMovementSystem = (
 
     direction.forEach((dir, i) => {
       component.tilePositionable.pos[i] += component.moveable.speed[i] * dir;
+      component.moveable.direction[i] = dir;
     });
   }
 };
