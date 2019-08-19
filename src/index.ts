@@ -45,7 +45,7 @@ context.imageSmoothingEnabled = false;
   const spriteSheet = await createSpriteSheet(sprites, [
     ['pac-man-0', [473, 1, 12, 14]],
     ['pac-man-1', [457, 1, 12, 14]],
-    // ['blinky', [457, 65, 14, 14]],
+    ['blinky', [457, 65, 14, 14]],
 
     // Map tiles keyed by type
     ['A', [228, 0, 4, 4]],
@@ -74,7 +74,7 @@ context.imageSmoothingEnabled = false;
   bindMap(spriteRenderSystem);
 
   bindPacman(spriteRenderSystem, spriteAnimationSystem, playerMovementSystem, moveRotationSystem);
-  // bindBlinky(spriteRenderSystem);
+  bindBlinky(spriteRenderSystem);
 
   const loop = (time: number) => {
     context.clearRect(0, 0, canvas.width, canvas.height);
