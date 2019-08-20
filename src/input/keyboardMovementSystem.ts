@@ -10,7 +10,6 @@ import { Moveable } from '../moveable';
 
 const getDirection = (
   keyboard: Keyboard,
-  { speed }: Moveable,
 ): [number, number] => {
   switch (keyboard.getLastPressedKey()) {
     case 'ArrowLeft':
@@ -53,7 +52,7 @@ export const createKeyboardMovementSystem = (
   canMoveTo: typeof canMoveToTile,
 ) => (component: KeyboardMoveable) => {
   const [column, row] = component.tilePositionable.pos;
-  const direction = getDirection(keyboard, component.moveable);
+  const direction = getDirection(keyboard);
 
   if (
     canMoveTo(
