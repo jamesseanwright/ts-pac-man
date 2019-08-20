@@ -12,7 +12,9 @@ import createKeyboardMoveable, {
 import createMoveable from '../moveable';
 import createSpeedRotatable, { MovementRotatable } from '../movementRotatable';
 import createRotatable from '../rotatable';
-import createSpriteAnimatable, { SpriteAnimatable } from '../rendering/spriteAnimatable';
+import createSpriteAnimatable, {
+  SpriteAnimatable,
+} from '../rendering/spriteAnimatable';
 
 const bindPacman = (
   spriteRenderSystem: System<SpriteRenderable>,
@@ -30,7 +32,12 @@ const bindPacman = (
     rotatable,
   );
 
-  const spriteAnimatable = createSpriteAnimatable(spriteRenderable, 128, 2, 'pac-man');
+  const spriteAnimatable = createSpriteAnimatable(
+    spriteRenderable,
+    128,
+    2,
+    'pac-man',
+  );
   const keyboardMoveable = createKeyboardMoveable(positionable, moveable);
   const speedRotatable = createSpeedRotatable(moveable, rotatable);
 

@@ -1,5 +1,7 @@
 import createTrackingMoveable from '../trackingMoveable';
-import createTilePositionable, { TilePositionable } from '../../tilePositionable';
+import createTilePositionable, {
+  TilePositionable,
+} from '../../tilePositionable';
 import createMoveable from '../../moveable';
 import { createTrackingSystem } from '../trackingSystem';
 
@@ -20,7 +22,7 @@ describe('trackingSystem', () => {
     const canMoveTo = (
       currentPositionable: TilePositionable,
       column: number,
-      row: number
+      row: number,
     ) => row === 2 && column !== 3;
 
     const trackingSystem = createTrackingSystem(canMoveTo);
@@ -44,7 +46,7 @@ describe('trackingSystem', () => {
     const canMoveTo = (
       currentPositionable: TilePositionable,
       column: number,
-      row: number
+      row: number,
     ) => row !== 2 && column === 3;
 
     const trackingSystem = createTrackingSystem(canMoveTo);
@@ -68,7 +70,7 @@ describe('trackingSystem', () => {
     const canMoveTo = (
       currentPositionable: TilePositionable,
       column: number,
-      row: number
+      row: number,
     ) => row === 2 && column !== 3;
 
     const trackingSystem = createTrackingSystem(canMoveTo);
