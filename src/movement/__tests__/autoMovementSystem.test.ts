@@ -20,4 +20,21 @@ describe('autoMovementSystem', () => {
     expect(tilePositionable.pos).toEqual([3, 3]);
     expect(tilePositionable.offset).toEqual([0, 0]);
   });
+
+  it('should move the component in negative directions i.e. up and left', () => {
+    const tilePositionable = createTilePositionable(2, 2, 1, 1);
+    const moveable = createMoveable(-1, -1, 0.5, 0.5);
+    const autoMoveable = createAutoMoveable(tilePositionable, moveable);
+
+    autoMovementSystem(autoMoveable);
+
+    expect(tilePositionable.pos).toEqual([2, 2]);
+    expect(tilePositionable.offset).toEqual([-0.5, -0.5]);
+
+    autoMovementSystem(autoMoveable);
+    autoMovementSystem(autoMoveable);
+
+    expect(tilePositionable.pos).toEqual([1, 1]);
+    expect(tilePositionable.offset).toEqual([0, 0]);
+  });
 });

@@ -14,7 +14,7 @@ export const autoMovementSystem = ({
   moveable,
 }: AutoMoveable) => {
   moveable.direction.forEach((dir, i) => {
-    const hasReachedNextTile = tilePositionable.offset[i] >= 1;
+    const hasReachedNextTile = Math.abs(tilePositionable.offset[i]) >= 1;
 
     if (hasReachedNextTile) {
       tilePositionable.pos[i] += dir;
