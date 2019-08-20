@@ -22,7 +22,7 @@ const bindPacman = (
   playerMovementSystem: System<KeyboardMoveable>,
   moveRotationSystem: System<MovementRotatable>,
 ) => {
-  const positionable = createTilePositionable(1, 1, 3, 3);
+  const positionable = createTilePositionable(26, 46, 3, 3);
   const rotatable = createRotatable();
   const moveable = createMoveable(0, 0, 0.25, 0.25); // TODO: => tileMoveable
 
