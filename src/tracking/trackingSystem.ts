@@ -1,6 +1,7 @@
 import { TrackingMoveable } from './trackingMoveable';
 import { canMoveToTile } from '../map';
 import { TilePositionable } from '../tilePositionable';
+import createSystem from '../system';
 
 const getNeighbouringTiles = ({ pos: [column, row] }: TilePositionable): [number, number][] =>
   [[column - 1, row], [column + 1, row], [column, row - 1], [column, row + 1]];
@@ -54,4 +55,6 @@ export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) =>
     });
   };
 
-export default createTrackingSystem(canMoveToTile);
+export default createSystem<TrackingMoveable>(
+  createTrackingSystem(canMoveToTile),
+);
