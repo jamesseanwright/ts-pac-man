@@ -41,8 +41,6 @@ describe('trackingSystem', () => {
       targetPositionable,
     );
 
-    /* a stub that emulates
-     * a real map layout */
     const canMoveTo = (
       currentPositionable: TilePositionable,
       column: number,
@@ -59,7 +57,7 @@ describe('trackingSystem', () => {
   it('should set the tracker`s direction to left when the closest walkable to the target is behind', () => {
     const trackerPositionable = createTilePositionable(3, 2, 1, 1);
     const trackerMoveable = createMoveable(0, 0, 1, 1);
-    const targetPositionable = createTilePositionable(2, 4, 1, 1);
+    const targetPositionable = createTilePositionable(2, 2, 1, 1);
 
     const trackingMoveable = createTrackingMoveable(
       trackerPositionable,
@@ -67,8 +65,6 @@ describe('trackingSystem', () => {
       targetPositionable,
     );
 
-    /* a stub that emulates
-     * a real map layout */
     const canMoveTo = (
       currentPositionable: TilePositionable,
       column: number,

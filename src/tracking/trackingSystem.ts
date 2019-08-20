@@ -6,7 +6,7 @@ const getNeighbouringTiles = ({ pos: [column, row] }: TilePositionable): [number
   [[column - 1, row], [column + 1, row], [column, row - 1], [column, row + 1]];
 
 const getDistance = ([ax, ay]: [number, number], [bx, by]: [number, number]) =>
-  (bx + by) - (ax + ay);
+  Math.abs((bx + ax) - (by + ay));
 
 /* Retrieves the tile with the *smallest*
  * aggregate distance from the tracker.
@@ -18,9 +18,11 @@ const getClosestTileToTarget = (
   target: TilePositionable,
   canMoveTo: typeof canMoveToTile,
 ): [number, number] =>
-  neighbouringTiles.sort(
-    (a, b) => getDistance(a, target.pos) - getDistance(b, target.pos),
-  ).find(([col, row]) => canMoveTo(trackerPositionable, col, row)) || [0, 0]; // TODO: confirm fallback case
+  neighbouringTiles
+    .sort(
+      (a, b) => getDistance(a, target.pos) - getDistance(b, target.pos),
+    )
+    .find(([col, row]) => canMoveTo(trackerPositionable, col, row)) || [0, 0]; // TODO: confirm fallback
 
 /* This acts upon both directions, but
  * given how getNeighbouringTiles works,
