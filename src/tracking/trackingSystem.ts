@@ -9,11 +9,18 @@ const getDistance = ([ax, ay]: [number, number], [bx, by]: [number, number]) =>
   (bx + by) - (ax + ay);
 
 /* Retrieves the tile with the *smallest*
- * aggregate distance from the tracker */
-const getClosestTileToTarget = (neighbouringTiles: [number, number][], target: TilePositionable): [number, number] =>
+ * aggregate distance from the tracker.
+ * We can simply take the closest tile
+ * that's actually moveable. */
+const getClosestTileToTarget = (
+  neighbouringTiles: [number, number][],
+  trackerPositionable: TilePositionable,
+  target: TilePositionable,
+  canMoveTo: typeof canMoveToTile,
+): [number, number] =>
   neighbouringTiles.sort(
-    (a, b) => getDistance(a, target.pos) - getDistance(b, target.pos)
-  )[0];
+    (a, b) => getDistance(a, target.pos) - getDistance(b, target.pos),
+  ).find(([col, row]) => canMoveTo(trackerPositionable, col, row)) || [0, 0]; // TODO: confirm fallback case
 
 /* This acts upon both directions, but
  * given how getNeighbouringTiles works,
@@ -37,9 +44,7 @@ const getDirectionToClosestTile = ({ pos }: TilePositionable, tile: [number, num
 export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) =>
   ({ trackerPositionable, trackerMoveable, targetPositionable }: TrackingMoveable) => {
     const neighbouringTiles = getNeighbouringTiles(trackerPositionable);
-    console.log('*******', neighbouringTiles);
-    const closestTile = getClosestTileToTarget(neighbouringTiles, targetPositionable);
-    console.log('*******', closestTile);
+    const closestTile = getClosestTileToTarget(neighbouringTiles, trackerPositionable, targetPositionable, canMoveTo);
     const direction = getDirectionToClosestTile(trackerPositionable, closestTile);
 
     direction.forEach((dir, i) => {
