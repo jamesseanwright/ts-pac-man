@@ -3,6 +3,8 @@ import createSpriteRenderSystem from './rendering/spriteRenderSystem';
 import spriteAnimationSystem from './rendering/spriteAnimationSystem';
 import createPlayerMovementSystem from './input/keyboardMovementSystem';
 import moveRotationSystem from './moveRotationSystem';
+import trackingSystem from './tracking/trackingSystem';
+import autoMovementSystem from './movement/autoMovementSystem';
 import createKeyboard from './input/keyboard';
 import bindPacman from './entities/pacman';
 import bindBlinky from './entities/blinky';
@@ -73,13 +75,19 @@ context.imageSmoothingEnabled = false;
 
   bindMap(spriteRenderSystem);
 
-  bindPacman(
+  const [targetPositionable] = bindPacman(
     spriteRenderSystem,
     spriteAnimationSystem,
     playerMovementSystem,
     moveRotationSystem,
   );
-  bindBlinky(spriteRenderSystem);
+
+  bindBlinky(
+    spriteRenderSystem,
+    trackingSystem,
+    autoMovementSystem,
+    targetPositionable,
+  );
 
   const loop = (time: number) => {
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -88,6 +96,8 @@ context.imageSmoothingEnabled = false;
     spriteAnimationSystem.update(time);
     playerMovementSystem.update(time);
     moveRotationSystem.update(time);
+    trackingSystem.update(time);
+    autoMovementSystem.update(time);
 
     requestAnimationFrame(loop);
   };

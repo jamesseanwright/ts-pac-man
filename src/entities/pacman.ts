@@ -45,6 +45,8 @@ const bindPacman = (
   spriteAnimationSystem.register(spriteAnimatable);
   playerMovementSystem.register(keyboardMoveable);
   moveRotationSystem.register(speedRotatable);
+
+  return [positionable]; // TODO: make entities return all components
 };
 
 export default bindPacman;
