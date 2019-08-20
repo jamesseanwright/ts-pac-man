@@ -79,4 +79,28 @@ describe('trackingSystem', () => {
 
     expect(trackingMoveable.trackerMoveable.direction).toEqual([-1, 0]);
   });
+
+  it('should change the tracker`s direction when it reaches a non-walkable tile', () => {
+    const trackerPositionable = createTilePositionable(3, 2, 1, 1);
+    const trackerMoveable = createMoveable(-1, 0, 1, 1);
+    const targetPositionable = createTilePositionable(2, 3, 1, 1);
+
+    const trackingMoveable = createTrackingMoveable(
+      trackerPositionable,
+      trackerMoveable,
+      targetPositionable,
+    );
+
+    const canMoveTo = (
+      currentPositionable: TilePositionable,
+      column: number,
+      row: number,
+    ) => row >= 2 && column === 3;
+
+    const trackingSystem = createTrackingSystem(canMoveTo);
+
+    trackingSystem(trackingMoveable);
+
+    expect(trackingMoveable.trackerMoveable.direction).toEqual([0, 1]);
+  });
 });

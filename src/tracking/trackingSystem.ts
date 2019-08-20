@@ -57,12 +57,14 @@ export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => ({
   targetPositionable,
 }: TrackingMoveable) => {
   const neighbouringTiles = getNeighbouringTiles(trackerPositionable);
+
   const closestTile = getClosestTileToTarget(
     neighbouringTiles,
     trackerPositionable,
     targetPositionable,
     canMoveTo,
   );
+
   const direction = getDirectionToClosestTile(trackerPositionable, closestTile);
 
   direction.forEach((dir, i) => {
