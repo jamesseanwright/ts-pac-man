@@ -12,8 +12,15 @@ const getNeighbouringTiles = ({
   [column, row + 1],
 ];
 
-const getDistance = ([ax, ay]: [number, number], [bx, by]: [number, number]) =>
-  (bx + ax) - (by + ay);
+// TODO: type for point tuple
+// This is Euclidian distance: /wiki/Euclidean_distance
+const getDistance = (a: [number, number], b: [number, number]) => {
+  const displacement = b.map((p, i) => p - a[i]);
+
+  return Math.sqrt(
+    displacement.reduce((dis, p) => dis + p * p, 0),
+  );
+};
 
 /* Retrieves the tile with the *smallest*
  * aggregate distance from the tracker.
