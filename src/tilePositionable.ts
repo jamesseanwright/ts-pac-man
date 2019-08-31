@@ -5,13 +5,15 @@
 export const TILE_WIDTH = 0.0177;
 export const TILE_HEIGHT = 0.0161;
 
+export type Point2D = [number, number];
+
 export interface TilePositionable {
   /* pos refers to tile numbers, not world spaces
    * TODO: make clearer in property naming?!
    * TODO: better name to incorporate width
    * and height. Width/height in tiles?! */
-  pos: [number, number];
-  offset: [number, number]; // World space offset for transitions
+  pos: Point2D;
+  offset: Point2D; // World space offset for transitions
   width: number; // Multiple of TILE_WIDTH
   height: number; // Multiple of TILE_HEIGHT
 }

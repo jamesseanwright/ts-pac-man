@@ -1,6 +1,8 @@
+import { Point2D } from './tilePositionable';
+
 export interface Moveable {
-  direction: [number, number];
-  speed: [number, number];
+  direction: Point2D;
+  speed: Point2D;
 }
 
 // TODO: => createTileMoveable

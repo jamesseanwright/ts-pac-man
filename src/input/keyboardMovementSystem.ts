@@ -2,15 +2,14 @@
 // TODO: rename playerMovementSystem
 
 import { Keyboard } from './keyboard';
-import { TilePositionable, TILE_WIDTH, TILE_HEIGHT } from '../tilePositionable';
+import { Point2D } from '../tilePositionable';
 import { canMoveToTile } from '../map';
 import createSystem from '../system';
 import { KeyboardMoveable } from './keyboardMoveable';
-import { Moveable } from '../moveable';
 
 const getDirection = (
   keyboard: Keyboard,
-): [number, number] => {
+): Point2D => {
   switch (keyboard.getLastPressedKey()) {
     case 'ArrowLeft':
       return [-1, 0];
@@ -31,7 +30,7 @@ const getDirection = (
 
 const move = (
   { tilePositionable, moveable }: KeyboardMoveable,
-  direction: [number, number],
+  direction: Point2D,
 ) => {
   direction.forEach((dir, i) => {
     const hasReachedNextTile =

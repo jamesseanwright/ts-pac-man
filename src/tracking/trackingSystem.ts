@@ -1,11 +1,11 @@
 import { TrackingMoveable } from './trackingMoveable';
 import { canMoveToTile } from '../map';
-import { TilePositionable } from '../tilePositionable';
+import { TilePositionable, Point2D } from '../tilePositionable';
 import createSystem from '../system';
 
 const getNeighbouringTiles = ({
   pos: [column, row],
-}: TilePositionable): [number, number][] => [
+}: TilePositionable): Point2D[] => [
   [column - 1, row],
   [column + 1, row],
   [column, row - 1],
@@ -14,7 +14,7 @@ const getNeighbouringTiles = ({
 
 // TODO: type for point tuple
 // This is Euclidian distance: /wiki/Euclidean_distance
-const getDistance = (a: [number, number], b: [number, number]) => {
+const getDistance = (a: Point2D, b: Point2D) => {
   const displacement = b.map((p, i) => p - a[i]);
 
   return Math.sqrt(
@@ -27,11 +27,11 @@ const getDistance = (a: [number, number], b: [number, number]) => {
  * We can simply take the closest tile
  * that's actually moveable. */
 const getClosestTileToTarget = (
-  neighbouringTiles: [number, number][],
+  neighbouringTiles: Point2D[],
   trackerPositionable: TilePositionable,
   target: TilePositionable,
   canMoveTo: typeof canMoveToTile,
-): [number, number] =>
+): Point2D =>
   [...neighbouringTiles]
     .filter(([col, row]) => canMoveTo(trackerPositionable, col, row))
     .sort((a, b) => getDistance(a, target.pos) - getDistance(b, target.pos))[0]
@@ -44,7 +44,7 @@ const getClosestTileToTarget = (
  * expressing this (I'm tired...) */
 const getDirectionToClosestTile = (
   { pos }: TilePositionable,
-  tile: [number, number],
+  tile: Point2D,
 ) =>
   pos.map((p, i) => {
     if (p < tile[i]) {
@@ -56,7 +56,7 @@ const getDirectionToClosestTile = (
     }
 
     return 0;
-  }) as [number, number];
+  }) as Point2D;
 
 export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => ({
   trackerPositionable,
