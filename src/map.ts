@@ -9,7 +9,6 @@ import { System } from './system';
  * by increments of 1.57 rad/90 deg
  * i.e. 0 => 0, 1 => 1.57, 2 => 3.14, 3 => 4.71 */
 
-// TODO: shorter inner walls for corners
 type OuterCorner = 'A0' | 'A1' | 'A2' | 'A3';
 type InnerCorner = 'B0' | 'B1' | 'B2' | 'B3';
 type StraightWall = 'C0' | 'C1';

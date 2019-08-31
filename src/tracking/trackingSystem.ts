@@ -12,7 +12,6 @@ const getNeighbouringTiles = ({
   [column, row + 1],
 ];
 
-// TODO: type for point tuple
 // This is Euclidian distance: /wiki/Euclidean_distance
 const getDistance = (a: Point2D, b: Point2D) => {
   const displacement = b.map((p, i) => p - a[i]);
