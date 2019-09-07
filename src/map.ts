@@ -75,6 +75,8 @@ const tiles: Tile[][] = [
   ['A3', ...fill(54, 'C0'), 'A2'],
 ];
 
+(window as any).tiles = tiles;
+
 // TODO: corners probably need to be walkable...
 // TODO: do we need to export this?
 export const isWalkable = (tile: Tile): tile is Walkable => tile === 'O';
@@ -114,14 +116,13 @@ export const createCanMoveToTile = (map: Tile[][]) => (
   column: number,
   row: number,
 ) => {
-  const { width, height, pos } = currentPositionable;
+  const { width, height, pos, offset } = currentPositionable;
   const [currentColumn, currentRow] = pos;
-  const columnOffset = column > currentColumn ? width - 1 : 0;
-  const rowOffset = row > currentRow ? height - 1 : 0;
-  const targetColumn = column + columnOffset;
-  const targetRow = row + rowOffset;
+  const targetColumn = column + Math.ceil(offset[0]) + (column > currentColumn ? width - 1 : 0);
+  const targetRow = row + Math.ceil(offset[1]) + (row > currentRow ? height - 1 : 0);
+  const walkable = isWalkable(map[targetRow][targetColumn]);
 
-  return isWalkable(map[targetRow][targetColumn]);
+  return walkable;
 };
 
 export const canMoveToTile = createCanMoveToTile(tiles);

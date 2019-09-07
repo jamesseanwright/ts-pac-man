@@ -24,6 +24,8 @@ const bindBlinky = (
     targetPositionable,
   );
 
+  (positionable as any).blinky = true;
+
   spriteRenderSystem.register(spriteRenderable);
   trackingSystem.register(trackingMoveable);
   autoMovementSystem.register(autoMoveable);

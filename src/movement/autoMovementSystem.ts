@@ -13,6 +13,10 @@ export const autoMovementSystem = ({
   tilePositionable,
   moveable,
 }: AutoMoveable) => {
+  if ((tilePositionable as any).blinky) {
+    console.log('**********', tilePositionable.pos);
+  }
+
   moveable.direction.forEach((dir, i) => {
     const hasReachedNextTile = Math.abs(tilePositionable.offset[i]) >= 1;
 

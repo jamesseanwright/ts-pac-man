@@ -2,14 +2,17 @@ import { TrackingMoveable } from './trackingMoveable';
 import { canMoveToTile } from '../map';
 import { TilePositionable, Point2D } from '../tilePositionable';
 import createSystem from '../system';
+import { Moveable } from '../moveable';
 
+/* Precedence follows that
+ * of original game. */
 const getNeighbouringTiles = ({
   pos: [column, row],
 }: TilePositionable): Point2D[] => [
-  [column - 1, row],
-  [column + 1, row],
   [column, row - 1],
+  [column - 1, row],
   [column, row + 1],
+  [column + 1, row],
 ];
 
 // This is Euclidian distance: /wiki/Euclidean_distance
@@ -31,7 +34,7 @@ const getClosestTileToTarget = (
   target: TilePositionable,
   canMoveTo: typeof canMoveToTile,
 ): Point2D =>
-  [...neighbouringTiles]
+  neighbouringTiles
     .filter(([col, row]) => canMoveTo(trackerPositionable, col, row))
     .sort((a, b) => getDistance(a, target.pos) - getDistance(b, target.pos))[0]
 
@@ -55,7 +58,10 @@ const getDirectionToClosestTile = (
     }
 
     return 0;
-  }) as Point2D;
+  });
+
+const hasOffset = ({ offset }: TilePositionable) =>
+  offset.some(o => o !== 0);
 
 export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => ({
   trackerPositionable,
@@ -70,6 +76,12 @@ export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => ({
     targetPositionable,
     canMoveTo,
   );
+
+  /* We don't want to change direction
+   * when transitioning between tiles */
+  if (hasOffset(trackerPositionable)) {
+    return;
+  }
 
   const direction = getDirectionToClosestTile(trackerPositionable, closestTile);
 

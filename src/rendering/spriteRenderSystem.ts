@@ -40,6 +40,7 @@ export const createSpriteRenderSystem = (
     projectedWidth,
     projectedHeight,
   );
+
   context.resetTransform();
 };
 

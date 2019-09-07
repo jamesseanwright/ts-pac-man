@@ -40,6 +40,27 @@ const loadSpriteSheet = () =>
 
 context.imageSmoothingEnabled = false;
 
+const createSteppableRaf = () => {
+  let callback: FrameRequestCallback;
+
+  window.addEventListener('keydown', ({ key }) => {
+    if (key === 'x') {
+      window.requestAnimationFrame(callback);
+    }
+  });
+
+  const rAF = (cb: FrameRequestCallback) => {
+    if (!callback) {
+      callback = cb;
+      window.requestAnimationFrame(callback);
+    }
+  };
+
+  return rAF;
+};
+
+// const requestAnimationFrame = createSteppableRaf();
+
 (async () => {
   const sprites = await loadSpriteSheet();
 
