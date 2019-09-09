@@ -2,17 +2,15 @@ import { TrackingMoveable } from './trackingMoveable';
 import { canMoveToTile } from '../map';
 import { TilePositionable, Point2D } from '../tilePositionable';
 import createSystem from '../system';
-import { Moveable } from '../moveable';
+import { addVectors } from '../vectors';
 
 /* Precedence follows that
  * of original game. */
-const getNeighbouringTiles = ({
-  pos: [column, row],
-}: TilePositionable): Point2D[] => [
-  [column, row - 1],
-  [column - 1, row],
-  [column, row + 1],
-  [column + 1, row],
+const getPossibleDirections = (): Point2D[] => [
+  [0, -1],
+  [-1, 0],
+  [0, 1],
+  [1, 0],
 ];
 
 // This is Euclidian distance: /wiki/Euclidean_distance
@@ -29,17 +27,18 @@ const getDistance = (a: Point2D, b: Point2D) => {
  * We can simply take the closest tile
  * that's actually moveable. */
 const getClosestTileToTarget = (
-  neighbouringTiles: Point2D[],
+  possibleDirections: Point2D[],
   trackerPositionable: TilePositionable,
   target: TilePositionable,
   canMoveTo: typeof canMoveToTile,
 ): Point2D =>
-  neighbouringTiles
-    .filter(([col, row]) => canMoveTo(trackerPositionable, col, row))
+  possibleDirections
+    .filter(direction => canMoveTo(trackerPositionable, direction))
+    .map(direction => addVectors(trackerPositionable.pos, direction) as [number, number])
     .sort((a, b) => getDistance(a, target.pos) - getDistance(b, target.pos))[0]
 
 /* This acts upon both directions, but
- * given how getNeighbouringTiles works,
+ * given how getPossibleDirections works,
  * we can safely assume that only one scalar
  * will be greater than zero.
  * TODO: find a succinct, mathsy way of
@@ -68,10 +67,10 @@ export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => ({
   trackerMoveable,
   targetPositionable,
 }: TrackingMoveable) => {
-  const neighbouringTiles = getNeighbouringTiles(trackerPositionable);
+  const possibleDirections = getPossibleDirections();
 
   const closestTile = getClosestTileToTarget(
-    neighbouringTiles,
+    possibleDirections,
     trackerPositionable,
     targetPositionable,
     canMoveTo,

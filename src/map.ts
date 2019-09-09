@@ -4,6 +4,7 @@ import createSpriteRenderable, {
 import createTilePositionable, { TilePositionable } from './tilePositionable';
 import createRotatable from './rotatable';
 import { System } from './system';
+import { addVectors, ceilingVector } from './vectors';
 
 /* Numbers next to tile type represent rotation
  * by increments of 1.57 rad/90 deg
@@ -111,18 +112,17 @@ export const createMapBinder = (map: Tile[][]) => (
   });
 };
 
+const getWidthOffset = (direction: number[], size: number[]) =>
+  direction.map((d, i) => d === 1 ? size[i] - 1 : 0);
+
 export const createCanMoveToTile = (map: Tile[][]) => (
   currentPositionable: TilePositionable,
-  column: number,
-  row: number,
+  direction: [number, number],
 ) => {
   const { width, height, pos, offset } = currentPositionable;
-  const [currentColumn, currentRow] = pos;
-  const targetColumn = column + Math.ceil(offset[0]) + (column > currentColumn ? width - 1 : 0);
-  const targetRow = row + Math.ceil(offset[1]) + (row > currentRow ? height - 1 : 0);
-  const walkable = isWalkable(map[targetRow][targetColumn]);
+  const [targetColumn, targetRow] = addVectors(pos, ceilingVector(offset), getWidthOffset(direction, [width, height]));
 
-  return walkable;
+  return isWalkable(map[targetRow][targetColumn]);
 };
 
 export const canMoveToTile = createCanMoveToTile(tiles);

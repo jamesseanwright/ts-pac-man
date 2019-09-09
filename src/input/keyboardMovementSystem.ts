@@ -50,15 +50,10 @@ export const createKeyboardMovementSystem = (
   keyboard: Keyboard,
   canMoveTo: typeof canMoveToTile,
 ) => (component: KeyboardMoveable) => {
-  const [column, row] = component.tilePositionable.pos;
   const direction = getDirection(keyboard);
 
   if (
-    canMoveTo(
-      component.tilePositionable,
-      column + Math.ceil(direction[0]),
-      row + Math.ceil(direction[1]),
-    )
+    canMoveTo(component.tilePositionable, direction)
   ) {
     move(component, direction);
   }
