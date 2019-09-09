@@ -7,9 +7,7 @@ import { canMoveToTile } from '../map';
 import createSystem from '../system';
 import { KeyboardMoveable } from './keyboardMoveable';
 
-const getDirection = (
-  keyboard: Keyboard,
-): Point2D => {
+const getDirection = (keyboard: Keyboard): Point2D => {
   switch (keyboard.getLastPressedKey()) {
     case 'ArrowLeft':
       return [-1, 0];
@@ -52,9 +50,7 @@ export const createKeyboardMovementSystem = (
 ) => (component: KeyboardMoveable) => {
   const direction = getDirection(keyboard);
 
-  if (
-    canMoveTo(component.tilePositionable, direction)
-  ) {
+  if (canMoveTo(component.tilePositionable, direction)) {
     move(component, direction);
   }
 };

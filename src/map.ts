@@ -113,14 +113,18 @@ export const createMapBinder = (map: Tile[][]) => (
 };
 
 const getWidthOffset = (direction: number[], size: number[]) =>
-  direction.map((d, i) => d === 1 ? size[i] - 1 : 0);
+  direction.map((d, i) => (d === 1 ? size[i] - 1 : 0));
 
 export const createCanMoveToTile = (map: Tile[][]) => (
   currentPositionable: TilePositionable,
   direction: [number, number],
 ) => {
   const { pos, size, offset } = currentPositionable;
-  const [targetColumn, targetRow] = addVectors(pos, ceilingVector(offset), getWidthOffset(direction, size));
+  const [targetColumn, targetRow] = addVectors(
+    pos,
+    ceilingVector(offset),
+    getWidthOffset(direction, size),
+  );
 
   return isWalkable(map[targetRow][targetColumn]);
 };

@@ -4,7 +4,9 @@ import createSpriteRenderable, {
 } from '../rendering/spriteRenderable';
 import createMoveable from '../moveable';
 import { System } from '../system';
-import createTrackingMoveable, { TrackingMoveable } from '../tracking/trackingMoveable';
+import createTrackingMoveable, {
+  TrackingMoveable,
+} from '../tracking/trackingMoveable';
 import createAutoMoveable, { AutoMoveable } from '../movement/autoMoveable';
 
 const bindBlinky = (

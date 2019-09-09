@@ -17,9 +17,7 @@ const getPossibleDirections = (): Point2D[] => [
 const getDistance = (a: Point2D, b: Point2D) => {
   const displacement = b.map((p, i) => p - a[i]);
 
-  return Math.sqrt(
-    displacement.reduce((dis, p) => dis + p * p, 0),
-  );
+  return Math.sqrt(displacement.reduce((dis, p) => dis + p * p, 0));
 };
 
 const getDirectionToClosestTile = (
@@ -30,10 +28,13 @@ const getDirectionToClosestTile = (
 ): Point2D =>
   possibleDirections
     .filter(direction => canMoveTo(trackerPositionable, direction))
-    .sort((a, b) => getDistance(addVectors(trackerPositionable.pos, a), target.pos) - getDistance(addVectors(trackerPositionable.pos, b), target.pos))[0]
+    .sort(
+      (a, b) =>
+        getDistance(addVectors(trackerPositionable.pos, a), target.pos) -
+        getDistance(addVectors(trackerPositionable.pos, b), target.pos),
+    )[0];
 
-const hasOffset = ({ offset }: TilePositionable) =>
-  offset.some(o => o !== 0);
+const hasOffset = ({ offset }: TilePositionable) => offset.some(o => o !== 0);
 
 export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => ({
   trackerPositionable,
