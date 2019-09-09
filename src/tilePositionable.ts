@@ -14,8 +14,7 @@ export interface TilePositionable {
    * and height. Width/height in tiles?! */
   pos: Point2D;
   offset: Point2D; // World space offset for transitions
-  width: number; // Multiple of TILE_WIDTH
-  height: number; // Multiple of TILE_HEIGHT
+  size: Point2D;
 }
 
 const createTilePositionable = (
@@ -26,8 +25,7 @@ const createTilePositionable = (
 ): TilePositionable => ({
   pos: [column, row],
   offset: [0, 0],
-  width,
-  height,
+  size: [width, height],
 });
 
 export default createTilePositionable;

@@ -16,9 +16,9 @@ const createContext = (): Context => ({
 describe('spriteRenderSystem', () => {
   const project = ({
     pos: [x, y],
-    width,
-    height,
+    size: [width, height],
   }: TilePositionable): Points2D => [x, y, width, height];
+
   const positionable = createTilePositionable(10, 15, 32, 32);
 
   const spriteSheet = new Map<string, ImageBitmap>([

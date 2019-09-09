@@ -34,7 +34,7 @@ const getClosestTileToTarget = (
 ): Point2D =>
   possibleDirections
     .filter(direction => canMoveTo(trackerPositionable, direction))
-    .map(direction => addVectors(trackerPositionable.pos, direction) as [number, number])
+    .map(direction => addVectors(trackerPositionable.pos, direction) as Point2D)
     .sort((a, b) => getDistance(a, target.pos) - getDistance(b, target.pos))[0]
 
 /* This acts upon both directions, but

@@ -119,8 +119,8 @@ export const createCanMoveToTile = (map: Tile[][]) => (
   currentPositionable: TilePositionable,
   direction: [number, number],
 ) => {
-  const { width, height, pos, offset } = currentPositionable;
-  const [targetColumn, targetRow] = addVectors(pos, ceilingVector(offset), getWidthOffset(direction, [width, height]));
+  const { pos, size, offset } = currentPositionable;
+  const [targetColumn, targetRow] = addVectors(pos, ceilingVector(offset), getWidthOffset(direction, size));
 
   return isWalkable(map[targetRow][targetColumn]);
 };
