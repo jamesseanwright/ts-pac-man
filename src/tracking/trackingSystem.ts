@@ -22,11 +22,7 @@ const getDistance = (a: Point2D, b: Point2D) => {
   );
 };
 
-/* Retrieves the tile with the *smallest*
- * aggregate distance from the tracker.
- * We can simply take the closest tile
- * that's actually moveable. */
-const getClosestTileToTarget = (
+const getDirectionToClosestTile = (
   possibleDirections: Point2D[],
   trackerPositionable: TilePositionable,
   target: TilePositionable,
@@ -34,30 +30,7 @@ const getClosestTileToTarget = (
 ): Point2D =>
   possibleDirections
     .filter(direction => canMoveTo(trackerPositionable, direction))
-    .map(direction => addVectors(trackerPositionable.pos, direction) as Point2D)
-    .sort((a, b) => getDistance(a, target.pos) - getDistance(b, target.pos))[0]
-
-/* This acts upon both directions, but
- * given how getPossibleDirections works,
- * we can safely assume that only one scalar
- * will be greater than zero.
- * TODO: find a succinct, mathsy way of
- * expressing this (I'm tired...) */
-const getDirectionToClosestTile = (
-  { pos }: TilePositionable,
-  tile: Point2D,
-) =>
-  pos.map((p, i) => {
-    if (p < tile[i]) {
-      return 1;
-    }
-
-    if (p > tile[i]) {
-      return -1;
-    }
-
-    return 0;
-  });
+    .sort((a, b) => getDistance(addVectors(trackerPositionable.pos, a), target.pos) - getDistance(addVectors(trackerPositionable.pos, b), target.pos))[0]
 
 const hasOffset = ({ offset }: TilePositionable) =>
   offset.some(o => o !== 0);
@@ -69,7 +42,7 @@ export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => ({
 }: TrackingMoveable) => {
   const possibleDirections = getPossibleDirections();
 
-  const closestTile = getClosestTileToTarget(
+  const direction = getDirectionToClosestTile(
     possibleDirections,
     trackerPositionable,
     targetPositionable,
@@ -81,8 +54,6 @@ export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => ({
   if (hasOffset(trackerPositionable)) {
     return;
   }
-
-  const direction = getDirectionToClosestTile(trackerPositionable, closestTile);
 
   direction.forEach((dir, i) => {
     trackerMoveable.direction[i] = dir;
