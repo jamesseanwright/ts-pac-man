@@ -1,5 +1,4 @@
 // TODO: should this live in `input`?
-// TODO: rename playerMovementSystem
 
 import { Keyboard } from './keyboard';
 import { Point2D } from '../tilePositionable';
