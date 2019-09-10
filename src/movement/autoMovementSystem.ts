@@ -1,8 +1,3 @@
-/* TODO: due to time constraints, this is a pseudo-
- * duplicated from keyboardMovementSystem!
- * Either use this system for keyboard moveables
- * or find a good way to share this code! */
-
 import { AutoMoveable } from './autoMoveable';
 import createSystem from '../system';
 
