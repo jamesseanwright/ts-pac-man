@@ -11,18 +11,23 @@ import bindBlinky from './entities/blinky';
 import createProject2D from './rendering/camera';
 import bindMap from './map';
 
-const canvas = document.body.querySelector<HTMLCanvasElement>('#game');
+const throwIfNull = <T>(value: T | null, failureMessage: string) => {
+  if (value === null) {
+    throw new Error(failureMessage);
+  }
 
-if (!canvas) {
-  throw new Error('Game canvas could not be found in the DOM!');
-}
+  return value;
+};
 
-const context = canvas.getContext('2d');
+const canvas = throwIfNull(
+  document.body.querySelector<HTMLCanvasElement>('#game'),
+  'Game canvas could not be found in the DOM!',
+);
 
-if (!context) {
-  // TODO: abstract this pattern with a guard?
-  throw new Error('Game canvas could not be found in the DOM!');
-}
+const context = throwIfNull(
+  canvas.getContext('2d'),
+  'Game canvas could not be found in the DOM!',
+);
 
 const project2D = createProject2D([canvas.width, canvas.height]);
 
