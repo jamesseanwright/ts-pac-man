@@ -76,8 +76,6 @@ const tiles: Tile[][] = [
   ['A3', ...fill(54, 'C0'), 'A2'],
 ];
 
-(window as any).tiles = tiles;
-
 // TODO: corners probably need to be walkable...
 const isWalkable = (tile: Tile): tile is Walkable => tile === 'O';
 
