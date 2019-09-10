@@ -64,42 +64,25 @@ describe('map', () => {
 
     it('should return true if the specified position is walkable', () => {
       const tilePositionable = createTilePositionable(2, 2, 1, 1);
-      expect(canMoveToTile(tilePositionable, 1, 1)).toBe(true);
+      expect(canMoveToTile(tilePositionable, [1, 1])).toBe(true);
     });
 
     it('should return false if the specified position is not walkable', () => {
-      const tilePositionable = createTilePositionable(2, 2, 1, 1);
-      expect(canMoveToTile(tilePositionable, 1, 0)).toBe(false);
+      const tilePositionable = createTilePositionable(1, 2, 1, 1);
+      expect(canMoveToTile(tilePositionable, [-1, 0])).toBe(false);
     });
 
-    it('should return true if the entity is moving rightward and there is enough walkable space to accommodate its width', () => {
-      const tilePositionable = createTilePositionable(1, 1, 2, 2);
-      expect(canMoveToTile(tilePositionable, 2, 1)).toBe(true);
-    });
-
-    it('should return false if the entity is moving rightward and there is not enough walkable space to accommodate its width', () => {
-      const tilePositionable = createTilePositionable(2, 1, 2, 2);
-      expect(canMoveToTile(tilePositionable, 3, 1)).toBe(false);
-    });
-
-    it('should return true if the entity is moving downward and there is enough walkable space to accommodate its width', () => {
-      const tilePositionable = createTilePositionable(1, 1, 2, 2);
-      expect(canMoveToTile(tilePositionable, 1, 2)).toBe(true);
-    });
-
-    it('should return false if the entity is moving downward and there is not enough walkable space to accommodate its width', () => {
-      const tilePositionable = createTilePositionable(2, 1, 2, 2);
-      expect(canMoveToTile(tilePositionable, 1, 3)).toBe(false);
-    });
-
-    it('should return true if the entity is moving downward and rightward, and there is enough walkable space to accommodate its width', () => {
-      const tilePositionable = createTilePositionable(1, 1, 2, 2);
-      expect(canMoveToTile(tilePositionable, 2, 2)).toBe(true);
-    });
-
-    it('should return false if the entity is moving downward, and rightward, and there is not enough walkable space to accommodate its width', () => {
+    it('should offset any sizes if the corresponding directions are positive', () => {
       const tilePositionable = createTilePositionable(2, 2, 2, 2);
-      expect(canMoveToTile(tilePositionable, 3, 3)).toBe(false);
+      expect(canMoveToTile(tilePositionable, [1, 1])).toBe(false);
+    });
+
+    it('should incorporate rounded-up offsets', () => {
+      const tilePositionable = createTilePositionable(2, 2, 1, 1);
+
+      tilePositionable.offset = [0.5, 0.5];
+
+      expect(canMoveToTile(tilePositionable, [1, 1])).toBe(false);
     });
   });
 });

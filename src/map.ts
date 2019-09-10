@@ -1,7 +1,7 @@
 import createSpriteRenderable, {
   SpriteRenderable,
 } from './rendering/spriteRenderable';
-import createTilePositionable, { TilePositionable } from './tilePositionable';
+import createTilePositionable, { TilePositionable, Point2D } from './tilePositionable';
 import createRotatable from './rotatable';
 import { System } from './system';
 import { addVectors, ceilingVector } from './vectors';
@@ -114,12 +114,14 @@ const getWidthOffset = (direction: number[], size: number[]) =>
 
 export const createCanMoveToTile = (map: Tile[][]) => (
   currentPositionable: TilePositionable,
-  direction: [number, number],
+  direction: Point2D,
 ) => {
   const { pos, size, offset } = currentPositionable;
+
   const [targetColumn, targetRow] = addVectors(
     pos,
     ceilingVector(offset),
+    direction,
     getWidthOffset(direction, size),
   );
 
