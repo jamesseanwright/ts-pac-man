@@ -41,7 +41,6 @@ const bindPacman = (
     'pac-man',
   );
 
-
   const keyboardMoveable = createKeyboardMoveable(positionable, moveable);
   const speedRotatable = createSpeedRotatable(moveable, rotatable);
   const autoMoveable = createAutoMoveable(positionable, moveable);
@@ -50,7 +49,7 @@ const bindPacman = (
   spriteAnimationSystem.register(spriteAnimatable);
   keyboardMovementSystem.register(keyboardMoveable);
   moveRotationSystem.register(speedRotatable);
-  autoMovementSystem.register(autoMoveable)
+  autoMovementSystem.register(autoMoveable);
 
   return [positionable]; // TODO: make entities return all components
 };

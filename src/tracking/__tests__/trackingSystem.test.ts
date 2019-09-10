@@ -1,6 +1,7 @@
 import createTrackingMoveable from '../trackingMoveable';
 import createTilePositionable, {
-  TilePositionable, Point2D,
+  TilePositionable,
+  Point2D,
 } from '../../tilePositionable';
 import createMoveable from '../../moveable';
 import { createTrackingSystem } from '../trackingSystem';

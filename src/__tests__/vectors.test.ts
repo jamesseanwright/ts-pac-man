@@ -3,11 +3,7 @@ import { addVectors, multiplyVectors, ceilingVector } from '../vectors';
 describe('vector operations', () => {
   describe('addVectors', () => {
     it('should linearly add the vectors it receives as params', () => {
-      const vectors = [
-        [1, 5, 4, 7],
-        [3, 1, 6, 10],
-        [2, 2, 5, -3],
-      ];
+      const vectors = [[1, 5, 4, 7], [3, 1, 6, 10], [2, 2, 5, -3]];
 
       expect(addVectors(...vectors)).toEqual([6, 8, 15, 14]);
     });
@@ -15,11 +11,7 @@ describe('vector operations', () => {
 
   describe('multiplyVectors', () => {
     it('should linearly multiply the vectors it receives as params', () => {
-      const vectors = [
-        [2, 5, 4, 7],
-        [3, 1, 6, 10],
-        [2, 2, 5, -3],
-      ];
+      const vectors = [[2, 5, 4, 7], [3, 1, 6, 10], [2, 2, 5, -3]];
 
       expect(multiplyVectors(...vectors)).toEqual([12, 10, 120, -210]);
     });

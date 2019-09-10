@@ -34,7 +34,10 @@ export const createKeyboardMovementSystem = (
 ) => (component: KeyboardMoveable) => {
   const direction = getDirection(keyboard);
 
-  component.moveable.direction = canMoveTo(component.tilePositionable, direction)
+  component.moveable.direction = canMoveTo(
+    component.tilePositionable,
+    direction,
+  )
     ? direction
     : nullDirection;
 };
