@@ -26,7 +26,7 @@ const canvas = throwIfNull(
 
 const context = throwIfNull(
   canvas.getContext('2d'),
-  'Game canvas could not be found in the DOM!',
+  'Canvas context is missing!',
 );
 
 const project2D = createProject2D([canvas.width, canvas.height]);
