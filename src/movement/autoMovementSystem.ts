@@ -1,9 +1,6 @@
 import { AutoMoveable } from './autoMoveable';
 import createSystem from '../system';
 
-/* Given this is only used with tracking
- * we can safely assume, FOR NOW, that we
- * don't need to check if a tile is walable */
 export const autoMovementSystem = ({
   tilePositionable,
   moveable,
