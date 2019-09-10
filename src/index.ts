@@ -24,7 +24,7 @@ if (!context) {
   throw new Error('Game canvas could not be found in the DOM!');
 }
 
-const project2D = createProject2D(canvas.width, canvas.height);
+const project2D = createProject2D([canvas.width, canvas.height]);
 
 /* We have to load the image dynamically
  * as we need to be able to absolutely

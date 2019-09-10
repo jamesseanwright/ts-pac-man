@@ -2,10 +2,10 @@
  *
  * TODO: Use aspect ratio instead of
  * separate widths and heights. */
-export const TILE_WIDTH = 0.0177;
-export const TILE_HEIGHT = 0.0161;
 
 export type Point2D = [number, number];
+
+export const tileSize: Point2D = [0.0177, 0.0161];
 
 export interface TilePositionable {
   /* pos refers to tile numbers, not world spaces
