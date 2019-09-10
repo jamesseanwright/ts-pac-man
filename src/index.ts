@@ -1,7 +1,7 @@
 import createSpriteSheet from './spriteSheet';
 import createSpriteRenderSystem from './rendering/spriteRenderSystem';
 import spriteAnimationSystem from './rendering/spriteAnimationSystem';
-import createPlayerMovementSystem from './input/keyboardMovementSystem';
+import createKeyboardMovementSystem from './input/keyboardMovementSystem';
 import moveRotationSystem from './moveRotationSystem';
 import trackingSystem from './tracking/trackingSystem';
 import autoMovementSystem from './movement/autoMovementSystem';
@@ -40,6 +40,7 @@ const loadSpriteSheet = () =>
 
 context.imageSmoothingEnabled = false;
 
+// TODO: remove when done
 const createSteppableRaf = () => {
   let callback: FrameRequestCallback;
 
@@ -92,15 +93,16 @@ const createSteppableRaf = () => {
     'ArrowDown',
   ]);
 
-  const playerMovementSystem = createPlayerMovementSystem(keyboard);
+  const keyboardMovementSystem = createKeyboardMovementSystem(keyboard);
 
   bindMap(spriteRenderSystem);
 
   const [targetPositionable] = bindPacman(
     spriteRenderSystem,
     spriteAnimationSystem,
-    playerMovementSystem,
+    keyboardMovementSystem,
     moveRotationSystem,
+    autoMovementSystem,
   );
 
   bindBlinky(
@@ -115,7 +117,7 @@ const createSteppableRaf = () => {
 
     spriteRenderSystem.update(time);
     spriteAnimationSystem.update(time);
-    playerMovementSystem.update(time);
+    keyboardMovementSystem.update(time);
     moveRotationSystem.update(time);
     trackingSystem.update(time);
     autoMovementSystem.update(time);

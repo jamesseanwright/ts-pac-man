@@ -79,8 +79,7 @@ const tiles: Tile[][] = [
 (window as any).tiles = tiles;
 
 // TODO: corners probably need to be walkable...
-// TODO: do we need to export this?
-export const isWalkable = (tile: Tile): tile is Walkable => tile === 'O';
+const isWalkable = (tile: Tile): tile is Walkable => tile === 'O';
 
 export const toRadians = (rawRotation: string) => {
   const rotation = parseInt(rawRotation, 10);

@@ -1,4 +1,4 @@
-import { createMapBinder, Tile, createCanMoveToTile, isWalkable } from '../map';
+import { createMapBinder, Tile, createCanMoveToTile } from '../map';
 import createSpriteRenderable from '../rendering/spriteRenderable';
 import createTilePositionable from '../tilePositionable';
 import createRotatable from '../rotatable';

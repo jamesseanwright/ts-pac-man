@@ -7,6 +7,8 @@ import { canMoveToTile } from '../map';
 import createSystem from '../system';
 import { KeyboardMoveable } from './keyboardMoveable';
 
+const nullDirection: Point2D = [0, 0];
+
 const getDirection = (keyboard: Keyboard): Point2D => {
   switch (keyboard.getLastPressedKey()) {
     case 'ArrowLeft':
@@ -22,37 +24,20 @@ const getDirection = (keyboard: Keyboard): Point2D => {
       return [0, 1];
 
     default:
-      return [0, 0]; // TODO
+      return nullDirection;
   }
 };
 
-const move = (
-  { tilePositionable, moveable }: KeyboardMoveable,
-  direction: Point2D,
-) => {
-  direction.forEach((dir, i) => {
-    const hasReachedNextTile =
-      tilePositionable.offset[i] !== 0 && tilePositionable.offset[i] % 1 === 0;
-
-    if (hasReachedNextTile) {
-      tilePositionable.pos[i] += dir;
-      tilePositionable.offset[i] = 0;
-    } else {
-      tilePositionable.offset[i] += moveable.speed[i] * dir;
-      moveable.direction[i] = dir;
-    }
-  });
-};
-
+// TODO: keyboard direction system naming
 export const createKeyboardMovementSystem = (
   keyboard: Keyboard,
   canMoveTo: typeof canMoveToTile,
 ) => (component: KeyboardMoveable) => {
   const direction = getDirection(keyboard);
 
-  if (canMoveTo(component.tilePositionable, direction)) {
-    move(component, direction);
-  }
+  component.moveable.direction = canMoveTo(component.tilePositionable, direction)
+    ? direction
+    : nullDirection;
 };
 
 /* Pass in keyboard as external dependency so
