@@ -10,6 +10,7 @@ describe('project2D', () => {
     const project2D = createProject2D(tileSize.map((s, i) =>
       s * i === 0 ? 1000 : 500,
     ) as Point2D);
+
     const tilePositionable = createTilePositionable(1, 1, 4, 4);
     const projectedValues = project2D(tilePositionable);
 
