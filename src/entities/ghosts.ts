@@ -17,6 +17,8 @@ type GhostDefinition = [string, number, number, number, number];
 const ghosts: GhostDefinition[] = [
   ['blinky', 45, 1, -1, 0],
   ['pinky', 5, 1, -1, 0],
+  ['inky', 5, 46, 1, 0],
+  ['clyde', 47, 46, -1, 0],
 ];
 
 const bindGhost = (

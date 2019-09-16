@@ -76,6 +76,8 @@ const createSteppableRaf = () => {
     ['pac-man-1', [457, 1, 12, 14]],
     ['blinky', [457, 65, 14, 14]],
     ['pinky', [457, 81, 14, 14]],
+    ['inky', [457, 97, 14, 14]],
+    ['clyde', [457, 113, 14, 14]],
 
     // Map tiles keyed by type
     ['A', [228, 0, 4, 4]],
