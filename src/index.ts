@@ -7,7 +7,7 @@ import trackingSystem from './tracking/trackingSystem';
 import autoMovementSystem from './movement/autoMovementSystem';
 import createKeyboard from './input/keyboard';
 import bindPacman from './entities/pacman';
-import bindBlinky from './entities/blinky';
+import bindGhosts from './entities/ghosts';
 import createProject2D from './rendering/camera';
 import bindMap from './map';
 
@@ -75,6 +75,7 @@ const createSteppableRaf = () => {
     ['pac-man-0', [473, 1, 12, 14]],
     ['pac-man-1', [457, 1, 12, 14]],
     ['blinky', [457, 65, 14, 14]],
+    ['pinky', [457, 81, 14, 14]],
 
     // Map tiles keyed by type
     ['A', [228, 0, 4, 4]],
@@ -110,7 +111,7 @@ const createSteppableRaf = () => {
     autoMovementSystem,
   );
 
-  bindBlinky(
+  bindGhosts(
     spriteRenderSystem,
     trackingSystem,
     autoMovementSystem,
