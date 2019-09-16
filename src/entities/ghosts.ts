@@ -11,23 +11,23 @@ import createTrackingMoveable, {
 
 import createAutoMoveable, { AutoMoveable } from '../movement/autoMoveable';
 
-// [name, column, row]
-type GhostDefinition = [string, number, number];
+// [name, column, row, x dir, y dir]
+type GhostDefinition = [string, number, number, number, number];
 
 const ghosts: GhostDefinition[] = [
-  ['blinky', 45, 1],
-  ['pinky', 5, 1],
+  ['blinky', 45, 1, -1, 0],
+  ['pinky', 5, 1, -1, 0],
 ];
 
 const bindGhost = (
-  [name, column, row]: GhostDefinition,
+  [name, column, row, xDir, yDir]: GhostDefinition,
   spriteRenderSystem: System<SpriteRenderable>,
   trackingSystem: System<TrackingMoveable>,
   autoMovementSystem: System<AutoMoveable>,
   targetPositionable: TilePositionable,
 ) => {
   const positionable = createTilePositionable(column, row, 3, 3);
-  const moveable = createMoveable(0, 0, 0.23, 0.23);
+  const moveable = createMoveable(xDir, yDir, 0.23, 0.23);
   const autoMoveable = createAutoMoveable(positionable, moveable);
   const spriteRenderable = createSpriteRenderable(name, positionable);
 
@@ -49,7 +49,6 @@ const bindGhosts = (
   targetPositionable: TilePositionable,
 ) => {
   ghosts.forEach(def => {
-    console.log('********', def);
     bindGhost(
       def,
       spriteRenderSystem,

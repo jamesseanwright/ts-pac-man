@@ -41,6 +41,14 @@ export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => ({
   trackerMoveable,
   targetPositionable,
 }: TrackingMoveable) => {
+  /* We only want to change the
+   * direction once the current
+   * path is no longer walkable
+   * i.e. there's a wall. */
+  if (hasOffset(trackerPositionable) || canMoveTo(trackerPositionable, trackerMoveable.direction)) {
+    return;
+  }
+
   const possibleDirections = getPossibleDirections();
 
   const direction = getDirectionToClosestTile(
@@ -49,12 +57,6 @@ export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => ({
     targetPositionable,
     canMoveTo,
   );
-
-  /* We don't want to change direction
-   * when transitioning between tiles */
-  if (hasOffset(trackerPositionable)) {
-    return;
-  }
 
   direction.forEach((dir, i) => {
     trackerMoveable.direction[i] = dir;
