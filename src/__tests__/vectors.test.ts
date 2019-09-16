@@ -1,4 +1,4 @@
-import { addVectors, multiplyVectors, ceilingVector } from '../vectors';
+import { addVectors, multiplyVectors, ceilingVector, isNegationOfVector } from '../vectors';
 
 describe('vector operations', () => {
   describe('addVectors', () => {
@@ -22,6 +22,22 @@ describe('vector operations', () => {
       const vector = [0.02, 1.9, -1.4];
 
       expect(ceilingVector(vector)).toEqual([1, 2, -1]);
+    });
+  });
+
+  describe('isNegationOfVector', () => {
+    it('should return true if vector matches the negation when negated', () => {
+      const vector = [2, -3, 1];
+      const negation = [-2, 3, -1];
+
+      expect(isNegationOfVector(negation, vector)).toBe(true);
+    });
+
+    it('should return false if vector doesn`t match the negation', () => {
+      const vector = [2, 3, -1];
+      const negation = [-2, 3, -1];
+
+      expect(isNegationOfVector(negation, vector)).toBe(false);
     });
   });
 });

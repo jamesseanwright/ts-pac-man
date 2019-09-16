@@ -2,7 +2,7 @@ import { TrackingMoveable } from './trackingMoveable';
 import { canMoveToTile } from '../map';
 import { TilePositionable, Point2D } from '../tilePositionable';
 import createSystem from '../system';
-import { addVectors } from '../vectors';
+import { addVectors, isNegationOfVector } from '../vectors';
 
 /* Precedence follows that
  * of original game. */
@@ -20,32 +20,27 @@ const getDistance = (a: Point2D, b: Point2D) => {
   return Math.sqrt(displacement.reduce((dis, p) => dis + p * p, 0));
 };
 
+/* When filtering directions, we
+ * negate the current direction to
+ * prevent entities from reversing
+ * when the current path is clear. */
 const getDirectionToClosestTile = (
   possibleDirections: Point2D[],
-  trackerPositionable: TilePositionable,
-  target: TilePositionable,
+  { trackerPositionable, trackerMoveable, targetPositionable }: TrackingMoveable,
   canMoveTo: typeof canMoveToTile,
 ): Point2D =>
   possibleDirections
-    .filter(direction => canMoveTo(trackerPositionable, direction))
+    .filter(direction => !isNegationOfVector(direction, trackerMoveable.direction) && canMoveTo(trackerPositionable, direction))
     .sort(
       (a, b) =>
-        getDistance(addVectors(trackerPositionable.pos, a), target.pos) -
-        getDistance(addVectors(trackerPositionable.pos, b), target.pos),
+        getDistance(addVectors(trackerPositionable.pos, a), targetPositionable.pos) -
+        getDistance(addVectors(trackerPositionable.pos, b), targetPositionable.pos),
     )[0];
 
 const hasOffset = ({ offset }: TilePositionable) => offset.some(o => o !== 0);
 
-export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => ({
-  trackerPositionable,
-  trackerMoveable,
-  targetPositionable,
-}: TrackingMoveable) => {
-  /* We only want to change the
-   * direction once the current
-   * path is no longer walkable
-   * i.e. there's a wall. */
-  if (hasOffset(trackerPositionable) || canMoveTo(trackerPositionable, trackerMoveable.direction)) {
+export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => (trackingMoveable: TrackingMoveable) => {
+  if (hasOffset(trackingMoveable.trackerPositionable)) {
     return;
   }
 
@@ -53,13 +48,12 @@ export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => ({
 
   const direction = getDirectionToClosestTile(
     possibleDirections,
-    trackerPositionable,
-    targetPositionable,
+    trackingMoveable,
     canMoveTo,
   );
 
   direction.forEach((dir, i) => {
-    trackerMoveable.direction[i] = dir;
+    trackingMoveable.trackerMoveable.direction[i] = dir;
   });
 };
 
