@@ -1,19 +1,20 @@
 import { Moveable } from './moveable';
 import { Rotatable } from './rotatable';
-/* A component for rotations
- * based upon speed */
 
-export interface MovementRotatable {
+/* A component for rotations
+ * based upon direction */
+
+export interface DirectionRotatable {
   moveable: Moveable;
   rotatable: Rotatable;
 }
 
-const createMovementRotatable = (
+const createDirectionRotatable = (
   moveable: Moveable,
   rotatable: Rotatable,
-): MovementRotatable => ({
+): DirectionRotatable => ({
   moveable,
   rotatable,
 });
 
-export default createMovementRotatable;
+export default createDirectionRotatable;

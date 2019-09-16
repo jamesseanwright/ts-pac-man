@@ -9,8 +9,8 @@ import createKeyboardMoveable, {
   KeyboardMoveable,
 } from '../input/keyboardMoveable';
 
-import createMoveable, { Moveable } from '../moveable';
-import createSpeedRotatable, { MovementRotatable } from '../movementRotatable';
+import createMoveable from '../moveable';
+import createDirectionRotatable, { DirectionRotatable } from '../directionRotatable';
 import createRotatable from '../rotatable';
 import createSpriteAnimatable, {
   SpriteAnimatable,
@@ -21,7 +21,7 @@ const bindPacman = (
   spriteRenderSystem: System<SpriteRenderable>,
   spriteAnimationSystem: System<SpriteAnimatable>,
   keyboardMovementSystem: System<KeyboardMoveable>,
-  moveRotationSystem: System<MovementRotatable>,
+  directionRotationSystem: System<DirectionRotatable>,
   autoMovementSystem: System<AutoMoveable>,
 ) => {
   const positionable = createTilePositionable(26, 46, 3, 3);
@@ -42,13 +42,13 @@ const bindPacman = (
   );
 
   const keyboardMoveable = createKeyboardMoveable(positionable, moveable);
-  const speedRotatable = createSpeedRotatable(moveable, rotatable);
+  const speedRotatable = createDirectionRotatable(moveable, rotatable);
   const autoMoveable = createAutoMoveable(positionable, moveable);
 
   spriteRenderSystem.register(spriteRenderable);
   spriteAnimationSystem.register(spriteAnimatable);
   keyboardMovementSystem.register(keyboardMoveable);
-  moveRotationSystem.register(speedRotatable);
+  directionRotationSystem.register(speedRotatable);
   autoMovementSystem.register(autoMoveable);
 
   return [positionable]; // TODO: make entities return all components

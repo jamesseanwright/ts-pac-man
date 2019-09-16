@@ -2,7 +2,7 @@ import createSpriteSheet from './spriteSheet';
 import createSpriteRenderSystem from './rendering/spriteRenderSystem';
 import spriteAnimationSystem from './rendering/spriteAnimationSystem';
 import createKeyboardMovementSystem from './input/keyboardMovementSystem';
-import moveRotationSystem from './moveRotationSystem';
+import directionRotationSystem from './directionRotationSystem';
 import trackingSystem from './tracking/trackingSystem';
 import autoMovementSystem from './movement/autoMovementSystem';
 import createKeyboard from './input/keyboard';
@@ -106,7 +106,7 @@ const createSteppableRaf = () => {
     spriteRenderSystem,
     spriteAnimationSystem,
     keyboardMovementSystem,
-    moveRotationSystem,
+    directionRotationSystem,
     autoMovementSystem,
   );
 
@@ -123,7 +123,7 @@ const createSteppableRaf = () => {
     spriteRenderSystem.update(time);
     spriteAnimationSystem.update(time);
     keyboardMovementSystem.update(time);
-    moveRotationSystem.update(time);
+    directionRotationSystem.update(time);
     trackingSystem.update(time);
     autoMovementSystem.update(time);
 
