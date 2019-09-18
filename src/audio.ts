@@ -1,4 +1,4 @@
-type Context = Pick<
+export type Context = Pick<
   AudioContext,
   | 'createBufferSource'
   | 'decodeAudioData'
@@ -10,8 +10,8 @@ type PromiseMapCallback<TItem, TResolve> = (item: TItem) => Promise<TResolve>;
 const mapToPromises = <TItem, TResolve>(items: TItem[], cb: PromiseMapCallback<TItem, TResolve>) =>
   Promise.all(items.map(cb));
 
-export const audioPlayerCreator = (fetch: typeof window.fetch, audioContext: Context) =>
-  async (paths: string[]) => {
+export const audioPlayerCreator = (fetch: typeof window.fetch, audioContext: Context) => // TODO: pass context into public creator
+  async (...paths: string[]) => {
     const defaultBuffer = await audioContext.decodeAudioData(new ArrayBuffer(0));
     const responses = await mapToPromises(paths, path => fetch(path));
     const arrayBuffers = await mapToPromises(responses, res => res.arrayBuffer());
@@ -20,7 +20,7 @@ export const audioPlayerCreator = (fetch: typeof window.fetch, audioContext: Con
 
     let currentSource: AudioBufferSourceNode;
 
-    const play = (path: string) => {
+    const play = (path: string, loop = true) => {
       if (currentSource) {
         currentSource.stop();
         currentSource.disconnect(audioContext.destination);
@@ -28,10 +28,12 @@ export const audioPlayerCreator = (fetch: typeof window.fetch, audioContext: Con
 
       currentSource = audioContext.createBufferSource();
       currentSource.buffer = tracks.get(path) || defaultBuffer;
+      currentSource.loop = loop;
+      currentSource.connect(audioContext.destination);
       currentSource.start();
     };
 
     return play;
   };
 
-export default audioPlayerCreator(window.fetch, new AudioContext());
+// export default audioPlayerCreator(window.fetch, new AudioContext());
