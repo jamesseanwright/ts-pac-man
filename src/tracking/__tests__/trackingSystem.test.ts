@@ -125,6 +125,29 @@ describe('trackingSystem', () => {
     expect(trackingMoveable.trackerMoveable.direction).toEqual([0, 1]);
   });
 
+  it('should not directly reverse the component`s direction', () => {
+    const trackerPositionable = createTilePositionable(3, 2, 1, 1);
+    const trackerMoveable = createMoveable(0, 1, 1, 1);
+    const targetPositionable = createTilePositionable(3, 1, 1, 1);
+
+    const trackingMoveable = createTrackingMoveable(
+      trackerPositionable,
+      trackerMoveable,
+      targetPositionable,
+    );
+
+    const canMoveTo = (
+      currentPositionable: TilePositionable,
+      [xDir, yDir]: Point2D,
+    ) => (xDir === 1 && yDir === 0) || (xDir === 0 && yDir === -1);
+
+    const trackingSystem = createTrackingSystem(canMoveTo);
+
+    trackingSystem(trackingMoveable);
+
+    expect(trackingMoveable.trackerMoveable.direction).toEqual([1, 0]);
+  });
+
   it('should not update the direction if the track positionable has an offset', () => {
     const trackerPositionable = createTilePositionable(3, 2, 1, 1);
     const trackerMoveable = createMoveable(0, 0, 1, 1);
