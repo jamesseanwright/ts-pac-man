@@ -49,7 +49,7 @@ const getDirectionToClosestTile = (
           addVectors(trackerPositionable.pos, b),
           targetPositionable.pos,
         ),
-    )[0];
+    )[0] || [0, 0];
 
 const hasOffset = ({ offset }: TilePositionable) => offset.some(o => o !== 0);
 
