@@ -112,7 +112,7 @@ export const createMapBinder = (map: Tile[][]) => (
   });
 };
 
-const getWidthOffset = (direction: number[], size: number[]) =>
+const getSizeOffset = (direction: number[], size: number[]) =>
   direction.map((d, i) => (d === 1 ? size[i] - 1 : 0));
 
 export const createCanMoveToTile = (map: Tile[][]) => (
@@ -125,7 +125,7 @@ export const createCanMoveToTile = (map: Tile[][]) => (
     pos,
     ceilingVector(offset),
     direction,
-    getWidthOffset(direction, size),
+    getSizeOffset(direction, size),
   );
 
   return isWalkable(map[targetRow][targetColumn]);
