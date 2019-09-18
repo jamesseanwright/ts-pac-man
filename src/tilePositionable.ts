@@ -5,7 +5,7 @@
 
 export type Point2D = [number, number];
 
-export const tileSize: Point2D = [0.0177, 0.0161];
+export const tileSize: Point2D = [0.01769, 0.01613];
 
 export interface TilePositionable {
   /* pos refers to tile numbers, not world spaces

@@ -10,6 +10,7 @@ export const createSpriteAnimationSystem = () => {
         spriteAnimatable.frame === spriteAnimatable.sequenceLength - 1
           ? 0
           : spriteAnimatable.frame + 1;
+
       spriteAnimatable.spriteRenderable.spriteName = `${spriteAnimatable.spritePrefix}-${spriteAnimatable.frame}`;
       lastFrameTimeMs = time;
     }
