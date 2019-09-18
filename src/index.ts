@@ -71,7 +71,7 @@ const createSteppableRaf = () => {
 (async () => {
   const playAudio = await createAudioPlayer(
     new AudioContext(),
-    '/chase.mp3',
+    '/audio/chase.mp3',
   );
 
   const sprites = await loadSpriteSheet();
@@ -139,7 +139,7 @@ const createSteppableRaf = () => {
     requestAnimationFrame(loop);
   };
 
-  playAudio('/chase.mp3');
+  playAudio('/audio/chase.mp3');
 
   requestAnimationFrame(loop);
 })();

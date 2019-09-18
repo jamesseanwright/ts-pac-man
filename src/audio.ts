@@ -12,7 +12,6 @@ const mapToPromises = <TItem, TResolve>(items: TItem[], cb: PromiseMapCallback<T
 
 export const audioPlayerCreator = (fetch: typeof window.fetch) =>
   async (audioContext: Context, ...paths: string[]) => {
-    const defaultBuffer = await audioContext.decodeAudioData(new ArrayBuffer(0));
     const responses = await mapToPromises(paths, path => fetch(path));
     const arrayBuffers = await mapToPromises(responses, res => res.arrayBuffer());
     const audioBuffers = await mapToPromises(arrayBuffers, ab => audioContext.decodeAudioData(ab));
@@ -27,7 +26,7 @@ export const audioPlayerCreator = (fetch: typeof window.fetch) =>
       }
 
       currentSource = audioContext.createBufferSource();
-      currentSource.buffer = tracks.get(path) || defaultBuffer;
+      currentSource.buffer = tracks.get(path) || null;
       currentSource.loop = loop;
       currentSource.connect(audioContext.destination);
       currentSource.start();
