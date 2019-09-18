@@ -10,8 +10,8 @@ type PromiseMapCallback<TItem, TResolve> = (item: TItem) => Promise<TResolve>;
 const mapToPromises = <TItem, TResolve>(items: TItem[], cb: PromiseMapCallback<TItem, TResolve>) =>
   Promise.all(items.map(cb));
 
-export const audioPlayerCreator = (fetch: typeof window.fetch, audioContext: Context) => // TODO: pass context into public creator
-  async (...paths: string[]) => {
+export const audioPlayerCreator = (fetch: typeof window.fetch) =>
+  async (audioContext: Context, ...paths: string[]) => {
     const defaultBuffer = await audioContext.decodeAudioData(new ArrayBuffer(0));
     const responses = await mapToPromises(paths, path => fetch(path));
     const arrayBuffers = await mapToPromises(responses, res => res.arrayBuffer());
@@ -36,4 +36,4 @@ export const audioPlayerCreator = (fetch: typeof window.fetch, audioContext: Con
     return play;
   };
 
-// export default audioPlayerCreator(window.fetch, new AudioContext());
+export default audioPlayerCreator(window.fetch);

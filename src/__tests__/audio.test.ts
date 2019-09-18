@@ -26,12 +26,12 @@ describe('createAudioPlayer', () => {
     const bufferSource = createBufferSource();
     const audioBuffer = {} as unknown as AudioBuffer;
     const audioContext = createAudioContext();
-    const createAudioPlayer = audioPlayerCreator(fetch, audioContext);
+    const createAudioPlayer = audioPlayerCreator(fetch);
 
     audioContext.createBufferSource.mockReturnValue(bufferSource);
     audioContext.decodeAudioData.mockResolvedValue(audioBuffer);
 
-    const play = await createAudioPlayer('/chase.mp3');
+    const play = await createAudioPlayer(audioContext, '/chase.mp3');
 
     play('/chase.mp3');
 
@@ -49,7 +49,7 @@ describe('createAudioPlayer', () => {
     const chaseBuffer = {} as unknown as AudioBuffer;
     const deathBuffer = {} as unknown as AudioBuffer;
     const audioContext = createAudioContext();
-    const createAudioPlayer = audioPlayerCreator(fetch, audioContext);
+    const createAudioPlayer = audioPlayerCreator(fetch);
 
     audioContext.createBufferSource.mockReturnValueOnce(chase);
     audioContext.decodeAudioData.mockResolvedValueOnce(chaseBuffer);
@@ -57,7 +57,7 @@ describe('createAudioPlayer', () => {
     audioContext.createBufferSource.mockReturnValueOnce(death);
     audioContext.decodeAudioData.mockResolvedValueOnce(deathBuffer);
 
-    const play = await createAudioPlayer('/chase.mp3', '/death.mp3');
+    const play = await createAudioPlayer(audioContext, '/chase.mp3', '/death.mp3');
 
     play('/chase.mp3');
     play('/death.mp3');
@@ -72,12 +72,12 @@ describe('createAudioPlayer', () => {
     const bufferSource = createBufferSource();
     const audioBuffer = {} as unknown as AudioBuffer;
     const audioContext = createAudioContext();
-    const createAudioPlayer = audioPlayerCreator(fetch, audioContext);
+    const createAudioPlayer = audioPlayerCreator(fetch);
 
     audioContext.createBufferSource.mockReturnValue(bufferSource);
     audioContext.decodeAudioData.mockResolvedValue(audioBuffer);
 
-    const play = await createAudioPlayer('/chase.mp3');
+    const play = await createAudioPlayer(audioContext, '/chase.mp3');
 
     play('/chase.mp3', false);
 
