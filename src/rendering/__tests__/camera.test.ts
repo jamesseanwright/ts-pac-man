@@ -14,6 +14,6 @@ describe('project2D', () => {
     const tilePositionable = createTilePositionable(1, 1, 4, 4);
     const projectedValues = project2D(tilePositionable);
 
-    expect(projectedValues).toEqual([17.7, 8.05, 70.8, 32.2]);
+    expect(projectedValues).toEqual([17.69, 8.065, 70.76, 32.26]);
   });
 });
