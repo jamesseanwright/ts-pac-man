@@ -10,7 +10,9 @@ import createKeyboardMoveable, {
 } from '../input/keyboardMoveable';
 
 import createMoveable from '../moveable';
-import createDirectionRotatable, { DirectionRotatable } from '../directionRotatable';
+import createDirectionRotatable, {
+  DirectionRotatable,
+} from '../directionRotatable';
 import createRotatable from '../rotatable';
 import createSpriteAnimatable, {
   SpriteAnimatable,

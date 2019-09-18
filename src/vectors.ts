@@ -12,5 +12,7 @@ export const multiplyVectors = <TVector extends number[]>(
 export const ceilingVector = <TVector extends number[]>(vector: TVector) =>
   vector.map(n => Math.ceil(n));
 
-export const isNegationOfVector = <TVector extends number[]>(negation: TVector, vector: TVector) =>
-  vector.every((n, i) => n * -1 === negation[i]);
+export const isNegationOfVector = <TVector extends number[]>(
+  negation: TVector,
+  vector: TVector,
+) => vector.every((n, i) => n * -1 === negation[i]);

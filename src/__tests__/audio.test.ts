@@ -1,9 +1,10 @@
 import { audioPlayerCreator, Context } from '../audio';
 
 describe('createAudioPlayer', () => {
-  const createResponse = () => ({
-    arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
-  } as unknown as Response);
+  const createResponse = () =>
+    (({
+      arrayBuffer: () => Promise.resolve(new ArrayBuffer(0)),
+    } as unknown) as Response);
 
   const createBufferSource = () => ({
     buffer: null,
@@ -24,7 +25,7 @@ describe('createAudioPlayer', () => {
 
   it('should create an audio player function that fetches the specified tracks and allows them to be played', async () => {
     const bufferSource = createBufferSource();
-    const audioBuffer = {} as unknown as AudioBuffer;
+    const audioBuffer = ({} as unknown) as AudioBuffer;
     const audioContext = createAudioContext();
     const createAudioPlayer = audioPlayerCreator(fetch);
 
@@ -46,8 +47,8 @@ describe('createAudioPlayer', () => {
   it('should stop and disconnect an existing source node when the track is changed', async () => {
     const chase = createBufferSource();
     const death = createBufferSource();
-    const chaseBuffer = {} as unknown as AudioBuffer;
-    const deathBuffer = {} as unknown as AudioBuffer;
+    const chaseBuffer = ({} as unknown) as AudioBuffer;
+    const deathBuffer = ({} as unknown) as AudioBuffer;
     const audioContext = createAudioContext();
     const createAudioPlayer = audioPlayerCreator(fetch);
 
@@ -57,7 +58,11 @@ describe('createAudioPlayer', () => {
     audioContext.createBufferSource.mockReturnValueOnce(death);
     audioContext.decodeAudioData.mockResolvedValueOnce(deathBuffer);
 
-    const play = await createAudioPlayer(audioContext, '/chase.mp3', '/death.mp3');
+    const play = await createAudioPlayer(
+      audioContext,
+      '/chase.mp3',
+      '/death.mp3',
+    );
 
     play('/chase.mp3');
     play('/death.mp3');
@@ -70,7 +75,7 @@ describe('createAudioPlayer', () => {
 
   it('should not loop when the optional loop param is false', async () => {
     const bufferSource = createBufferSource();
-    const audioBuffer = {} as unknown as AudioBuffer;
+    const audioBuffer = ({} as unknown) as AudioBuffer;
     const audioContext = createAudioContext();
     const createAudioPlayer = audioPlayerCreator(fetch);
 

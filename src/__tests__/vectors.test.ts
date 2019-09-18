@@ -1,4 +1,9 @@
-import { addVectors, multiplyVectors, ceilingVector, isNegationOfVector } from '../vectors';
+import {
+  addVectors,
+  multiplyVectors,
+  ceilingVector,
+  isNegationOfVector,
+} from '../vectors';
 
 describe('vector operations', () => {
   describe('addVectors', () => {

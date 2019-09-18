@@ -26,20 +26,36 @@ const getDistance = (a: Point2D, b: Point2D) => {
  * when the current path is clear. */
 const getDirectionToClosestTile = (
   possibleDirections: Point2D[],
-  { trackerPositionable, trackerMoveable, targetPositionable }: TrackingMoveable,
+  {
+    trackerPositionable,
+    trackerMoveable,
+    targetPositionable,
+  }: TrackingMoveable,
   canMoveTo: typeof canMoveToTile,
 ): Point2D =>
   possibleDirections
-    .filter(direction => !isNegationOfVector(direction, trackerMoveable.direction) && canMoveTo(trackerPositionable, direction))
+    .filter(
+      direction =>
+        !isNegationOfVector(direction, trackerMoveable.direction) &&
+        canMoveTo(trackerPositionable, direction),
+    )
     .sort(
       (a, b) =>
-        getDistance(addVectors(trackerPositionable.pos, a), targetPositionable.pos) -
-        getDistance(addVectors(trackerPositionable.pos, b), targetPositionable.pos),
+        getDistance(
+          addVectors(trackerPositionable.pos, a),
+          targetPositionable.pos,
+        ) -
+        getDistance(
+          addVectors(trackerPositionable.pos, b),
+          targetPositionable.pos,
+        ),
     )[0];
 
 const hasOffset = ({ offset }: TilePositionable) => offset.some(o => o !== 0);
 
-export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => (trackingMoveable: TrackingMoveable) => {
+export const createTrackingSystem = (canMoveTo: typeof canMoveToTile) => (
+  trackingMoveable: TrackingMoveable,
+) => {
   if (hasOffset(trackingMoveable.trackerPositionable)) {
     return;
   }
