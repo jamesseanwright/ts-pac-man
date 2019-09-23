@@ -15,6 +15,7 @@ const getPossibleDirections = (): Point2D[] => [
 
 // This is Euclidian distance: /wiki/Euclidean_distance
 const getDistance = (a: Point2D, b: Point2D) => {
+  // TODO: move to vectors#subtractVectors
   const displacement = b.map((p, i) => p - a[i]);
 
   return Math.sqrt(displacement.reduce((dis, p) => dis + p * p, 0));
