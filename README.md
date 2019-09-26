@@ -8,4 +8,6 @@ I'll be fleshing this out in the coming weeks, but to run:
 4. `npm i`
 5. `npm run dev`
 
+The unit test suite can be invoked with `npm test` (append `-- --watch` to enter Jest's watch mode).
+
 Sprite sheet attribution: https://www.spriters-resource.com/arcade/pacman/sheet/52631/
