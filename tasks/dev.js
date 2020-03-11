@@ -17,7 +17,7 @@ const fileServer = new Server('./dist', {
 
 const serveFile = fileServer.serve.bind(fileServer);
 const server = http.createServer(serveFile);
-const watcher = rollup.watch(config(false));
+const watcher = rollup.watch(config);
 
 watcher.on('event', event => {
   switch (event.code) {

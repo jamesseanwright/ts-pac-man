@@ -5,7 +5,7 @@ const { terser } = require('rollup-plugin-terser');
 const typescriptPlugin = require('rollup-plugin-typescript2');
 const typescript = require('typescript');
 
-module.exports = ({ prod }) => ({
+module.exports = ({
   input: 'src/index.ts',
   output: {
     dir: 'dist',
@@ -18,7 +18,7 @@ module.exports = ({ prod }) => ({
     typescriptPlugin({
       typescript,
     }),
-    prod &&
+    process.env.NODE_ENV === 'production' &&
       terser({
         mangle: {
           toplevel: true,
