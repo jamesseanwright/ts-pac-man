@@ -7,7 +7,7 @@
     "build": "NODE_ENV=production rollup -c && npm run copy-static",
     "copy-static": "bash -c 'cp -r src/{index.html,images,audio} dist'",
     "start": "static -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}' dist",
-    "dev": "npm run copy-static && ./tasks/dev.js",
+    "dev": "mkdir -p dist && npm run copy-static && ./tasks/dev.js",
     "format": "git diff-index --quiet HEAD -- && (prettier --write rollup.config.js 'tasks/**/*.js' 'src/**/*.ts' && git commit -am 'Fixes formatting') || echo 'Uncommitted  files! Please run git commit first.'",
     "test": "jest"
   },
